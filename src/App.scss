@@ -1,3 +1,5 @@
+@import "./style/variables.scss";
+@import "./style/global.scss";
 .app {
   &__container {
     display: flex;
@@ -5,7 +7,7 @@
   &__navbar {
     width: 20.3%;
     padding: 40px 35px;
-    border-right: 1px solid #333;
+    border-right: 1px solid $border-color;
     &_mobile {
       position: fixed;
       right: -1000%;
@@ -13,7 +15,7 @@
         width: 100%;
         position: fixed;
         z-index: 999;
-        background: blue;
+        background: $bg-primary;
         height: 100%;
       }
     }
