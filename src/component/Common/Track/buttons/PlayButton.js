@@ -2,16 +2,16 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Play } from "react-feather";
 
-import playerAPI from "utils/playerAPI";
+import playerAPI from "../../../../utils/playerAPI";
 
 export default class PlayButton extends Component {
   constructor(props) {
     super(props);
-    this.play = this.play.bind(this)
+    this.play = this.play.bind(this);
   }
 
   play() {
-    const {context, track} = this.props;
+    const { context, track } = this.props;
     if (track.isActive) {
       return playerAPI.resumeTrack();
     }
@@ -19,20 +19,17 @@ export default class PlayButton extends Component {
   }
 
   render() {
-    const {track} = this.props;
+    const { track } = this.props;
     if (track.preview_url) {
       return (
-        <span
-          onClick={this.play}
-          className="track__icon"
-        >
-          <Play/>
+        <span onClick={this.play} className="track__icon">
+          <Play />
         </span>
       );
     }
     return (
       <span className="track__icon disabled">
-        <Play/>
+        <Play />
       </span>
     );
   }

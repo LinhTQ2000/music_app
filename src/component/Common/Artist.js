@@ -2,10 +2,10 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
-import musician from "images/musician.png";
-import { ARTIST } from "constants/RouteConstants";
-import LazyLoad from "components/Common/LazyLoad";
-import "styles/Artist.scss";
+import musician from "./../../images/musician.png";
+import { ARTIST } from "./../../constants/RouteConstant";
+import LazyLoad from "./../../component/Common/LazyLoad";
+import "./../../style/Artist.scss";
 
 export default class Artist extends Component {
   shouldComponentUpdate(nextProps) {
@@ -13,7 +13,7 @@ export default class Artist extends Component {
   }
 
   render() {
-    const {image, id, handler, name} = this.props;
+    const { image, id, handler, name } = this.props;
     return (
       <div className="artist">
         <LazyLoad className="artist__pic">
@@ -21,16 +21,11 @@ export default class Artist extends Component {
             className={`artist__pic artist__pic_root bg-${
               !image ? "empty" : "center"
             }`}
-            style={{backgroundImage: `url(${image || musician})`}}
+            style={{ backgroundImage: `url(${image || musician})` }}
           ></div>
         </LazyLoad>
-        <Link
-          to={`${ARTIST}/${id}`}
-          className="artist__name"
-        >
-          <span onClick={handler}>
-            {name}
-          </span>
+        <Link to={`${ARTIST}/${id}`} className="artist__name">
+          <span onClick={handler}>{name}</span>
         </Link>
       </div>
     );

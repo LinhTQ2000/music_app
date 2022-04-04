@@ -3,12 +3,12 @@ import PropTypes from "prop-types";
 
 import PlayButton from "./buttons/PlayButton";
 import PauseButton from "./buttons/PauseButton";
-import LazyLoad from "components/Common/LazyLoad";
-import { connectPlayer } from "containers/PlayerContainer";
+import LazyLoad from "../LazyLoad";
+import { connectPlayer } from "../../../containers/PlayerContainer";
 
 export class CoverImage extends Component {
   shouldComponentUpdate(nextProps) {
-    const {track, player} = this.props;
+    const { track, player } = this.props;
     return (
       track.image !== nextProps.track.image ||
       track.isActive !== nextProps.track.isActive ||
@@ -17,18 +17,21 @@ export class CoverImage extends Component {
   }
 
   render() {
-    const {track, trackContext, player} = this.props;
+    const { track, trackContext, player } = this.props;
     const isAlbum = trackContext && trackContext.name.includes("album");
     return (
-      <div className={`
+      <div
+        className={`
         track__cover-art flex-center 
         ${!isAlbum ? "track__cover-art_has-image" : ""}
-      `}>
-        {!player.trackPaused && track.isActive
-          ? <PauseButton />
-          : <PlayButton track={track} context={trackContext}/>
-        }
-        {!isAlbum &&
+      `}
+      >
+        {!player.trackPaused && track.isActive ? (
+          <PauseButton />
+        ) : (
+          <PlayButton track={track} context={trackContext} />
+        )}
+        {!isAlbum && (
           <LazyLoad className="track__cover-art-image">
             <img
               className="track__cover-art-image"
@@ -36,7 +39,7 @@ export class CoverImage extends Component {
               alt=""
             />
           </LazyLoad>
-        }
+        )}
       </div>
     );
   }

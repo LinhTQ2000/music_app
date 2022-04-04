@@ -3,13 +3,13 @@ import PropTypes from "prop-types";
 
 import Columns from "./Columns";
 import Track from "./Track/Track";
-import playerAPI from "utils/playerAPI";
-import { connectPlayer } from "containers/PlayerContainer";
-import "styles/Tracks.scss";
+import playerAPI from "./../../utils/playerAPI";
+import { connectPlayer } from "./../../containers/PlayerContainer";
+import "../../style/Tracks.scss";
 
 export class Tracks extends Component {
   shouldComponentUpdate(nextProps) {
-    const {player, trackList, source} = this.props;
+    const { player, trackList, source } = this.props;
     return (
       nextProps.player.playingTrackId !== player.playingTrackId ||
       nextProps.trackList !== trackList ||
@@ -18,9 +18,9 @@ export class Tracks extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    const {player, source, trackList} = this.props;
+    const { player, source, trackList } = this.props;
     if (player.context.name !== source.name) {
-     return;
+      return;
     }
     if (player.context.tracks.length < trackList.length) {
       playerAPI.updateContext(trackList);
@@ -28,7 +28,7 @@ export class Tracks extends Component {
   }
 
   render() {
-    const {playingTrackId, context} = this.props.player;
+    const { playingTrackId, context } = this.props.player;
     const {
       trackList,
       columns = 1,
@@ -41,8 +41,8 @@ export class Tracks extends Component {
         {trackList.map((item, index) => {
           let track = {
             ...item,
-            isActive: item.id === playingTrackId &&
-                      context.name === source.name,
+            isActive:
+              item.id === playingTrackId && context.name === source.name,
             key: index + 1,
           };
           return (

@@ -4,8 +4,8 @@ import PropTypes from "prop-types";
 import CoverImage from "./TrackCoverImage";
 import TrackInfo from "./TrackInfo";
 import MoreButton from "./buttons/MoreButton";
-import LikeButton from "components/Common/LikeButton";
-import playerAPI from "utils/playerAPI";
+import LikeButton from "../LikeButton";
+import playerAPI from "../../../utils/playerAPI";
 
 export default class Track extends Component {
   shouldComponentUpdate(nextProps) {
@@ -17,29 +17,21 @@ export default class Track extends Component {
     );
   }
 
-  addToSavedTracks = ()=> {
+  addToSavedTracks = () => {
     playerAPI.addToSavedTracks(this.props.track);
-  }
+  };
 
   removeFromSavedTracks = () => {
     playerAPI.removeFromSavedTracks(this.props.track.id);
-  }
+  };
 
   render() {
-    const {
-      trackList,
-      charts,
-      source,
-      track,
-      removeTrackFromPlaylist,
-    } = this.props;
-    const trackContext = {name: source.name, tracks: trackList};
+    const { trackList, charts, source, track, removeTrackFromPlaylist } =
+      this.props;
+    const trackContext = { name: source.name, tracks: trackList };
     return (
       <div className={`track space-sm ${track.isActive ? "track_active" : ""}`}>
-        <CoverImage
-          track={track}
-          trackContext={trackContext}
-        />
+        <CoverImage track={track} trackContext={trackContext} />
         <TrackInfo charts={charts} track={track}>
           <span className="track__extra-controls">
             <LikeButton

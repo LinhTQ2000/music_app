@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { MoreHorizontal, Plus } from "react-feather";
 
-import ContextMenu from "components/Common/ContextMenu";
-import OpenContextMenuButton from "components/Common/OpenContextMenuButton";
+import ContextMenu from "../../../Common/ContextMenu";
+import OpenContextMenuButton from "../../../Common/OpenContextMenuButton";
 import ContextMenuOptions from "../contextMenu/ContextMenuOptions";
 import ContextMenuPlaylists from "../contextMenu/ContextMenuPlaylists";
 
@@ -16,33 +16,37 @@ export default class MoreButton extends Component {
 
   renderContextMenuButton(toggleContextMenu) {
     if (this.props.isMyPlaylist) {
-      return <MoreHorizontal onClick={toggleContextMenu}/>;
+      return <MoreHorizontal onClick={toggleContextMenu} />;
     }
     return <Plus onClick={toggleContextMenu} />;
   }
 
   renderContextMenu(closeContextMenu) {
-    const {isMyPlaylist, track, removeTrackFromPlaylist} = this.props;
+    const { isMyPlaylist, track, removeTrackFromPlaylist } = this.props;
     const trackRef = this.button.closest(".track");
     const currentPageNum = isMyPlaylist ? 1 : 2;
     const totalPages = isMyPlaylist ? 2 : 1;
-    const getOffsetTop = menuHeight => menuHeight < 150 ? -100 : -260;
+    const getOffsetTop = (menuHeight) => (menuHeight < 150 ? -100 : -260);
     const removeTrack = () => {
       removeTrackFromPlaylist(track.key - 1);
       closeContextMenu();
     };
     const renderContent = (currentPage, navigateToPage) => {
       const pagesContent = {
-        1: <ContextMenuOptions
-             removeTrack={removeTrack}
-             navigateToPage={navigateToPage}
-           />,
-        2: <ContextMenuPlaylists
-             totalPages={totalPages}
-             navigateToPage={navigateToPage}
-             trackUri={track.uri}
-             closeContextMenu={closeContextMenu}
-           />,
+        1: (
+          <ContextMenuOptions
+            removeTrack={removeTrack}
+            navigateToPage={navigateToPage}
+          />
+        ),
+        2: (
+          <ContextMenuPlaylists
+            totalPages={totalPages}
+            navigateToPage={navigateToPage}
+            trackUri={track.uri}
+            closeContextMenu={closeContextMenu}
+          />
+        ),
       };
       return pagesContent[currentPage];
     };
@@ -53,7 +57,7 @@ export default class MoreButton extends Component {
         totalPages={totalPages}
         containerRef={trackRef}
         defaultTop={17}
-        getOffsetTop ={getOffsetTop}
+        getOffsetTop={getOffsetTop}
         renderContent={renderContent}
       />
     );
@@ -61,7 +65,7 @@ export default class MoreButton extends Component {
 
   render() {
     return (
-      <span ref={el => (this.button = el)}>
+      <span ref={(el) => (this.button = el)}>
         <OpenContextMenuButton
           renderContextMenu={this.renderContextMenu}
           renderContent={this.renderContextMenuButton}

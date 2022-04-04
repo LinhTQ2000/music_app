@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { ReactComponent as Loader } from "images/loader.svg";
+import { ReactComponent as Loader } from "../../images/loader.svg";
 
 export default class ContextMenuItems extends Component {
   constructor(props) {
@@ -12,8 +12,8 @@ export default class ContextMenuItems extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    const {items, disableInfiniteScroll} = this.props;
-    const {searchInputValue} = this.state;
+    const { items, disableInfiniteScroll } = this.props;
+    const { searchInputValue } = this.state;
     if (prevProps.items.length < items.length) {
       this.setState({
         menuItems: items,
@@ -21,7 +21,7 @@ export default class ContextMenuItems extends Component {
     }
     if (searchInputValue !== prevState.searchInputValue) {
       disableInfiniteScroll &&
-      disableInfiniteScroll(Boolean(searchInputValue.length));
+        disableInfiniteScroll(Boolean(searchInputValue.length));
     }
   }
 
@@ -30,41 +30,45 @@ export default class ContextMenuItems extends Component {
       searchInputValue: "",
       menuItems: this.props.items,
     });
-  }
+  };
 
-  selectItem = item => {
+  selectItem = (item) => {
     if (item.name === "no results") {
-     return;
+      return;
     }
     this.props.handler({
       ...item,
       name: Array.isArray(item.name) ? item.name.join("") : item.name,
     });
     this.resetState();
-  }
+  };
 
-  handleInputChange = event => {
+  handleInputChange = (event) => {
     const inputValue = event.target.value.toLowerCase().trim();
     let searchMatches = this.props.items;
 
     if (inputValue.length) {
-      searchMatches = this.props.items.filter(item => {
-        const itemName = item.name.toLowerCase();
-        return itemName.includes(inputValue);
-      }).map(item => {
-        const reg = new RegExp(`(${inputValue})`, "i");
-        return {
-          ...item,
-          name: item.name.split(reg),
-        };
-      });
+      searchMatches = this.props.items
+        .filter((item) => {
+          const itemName = item.name.toLowerCase();
+          return itemName.includes(inputValue);
+        })
+        .map((item) => {
+          const reg = new RegExp(`(${inputValue})`, "i");
+          return {
+            ...item,
+            name: item.name.split(reg),
+          };
+        });
     }
 
     this.setState({
       searchInputValue: event.target.value,
-      menuItems: searchMatches.length ? searchMatches : [{name: "no results"}],
+      menuItems: searchMatches.length
+        ? searchMatches
+        : [{ name: "no results" }],
     });
-  }
+  };
 
   renderItem(itemName) {
     if (Array.isArray(itemName)) {
@@ -99,21 +103,19 @@ export default class ContextMenuItems extends Component {
   }
 
   render() {
-    const {loadMorePending, items, emptyMsg} = this.props;
+    const { loadMorePending, items, emptyMsg } = this.props;
     if (!items.length) {
-      return (
-        <p className="select__empty">
-          {emptyMsg}
-        </p>
-      );
+      return <p className="select__empty">{emptyMsg}</p>;
     }
     return (
       <div className="select__dropdown">
         <div className="select__inner custom-scrollbar">
-          <ul>
-            {this.renderMenuItems()}
-          </ul>
-          {loadMorePending && <div className="loader"><Loader/></div>}
+          <ul>{this.renderMenuItems()}</ul>
+          {loadMorePending && (
+            <div className="loader">
+              <Loader />
+            </div>
+          )}
         </div>
         <div className="select__search">
           <input

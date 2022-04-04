@@ -7,11 +7,11 @@ import {
   updateContext,
   changeCurrentTime,
   toggleReapeat,
-} from "actions/PlayerActions";
+} from "../actions/PlayerActions";
 import {
   addToFavoriteTracks,
   removeFromFavoriteTracks,
-} from "actions/TrackActions";
+} from "../actions/TrackActions";
 
 class PlayerAPI {
   constructor() {

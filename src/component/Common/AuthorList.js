@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
-import { ARTIST } from "constants/RouteConstants";
+import { ARTIST } from "../../constants/RouteConstant";
 
 export default class AuthorList extends Component {
   shouldComponentUpdate(nextProps) {
@@ -10,14 +10,12 @@ export default class AuthorList extends Component {
   }
 
   render() {
-    const {authors, handler} = this.props;
+    const { authors, handler } = this.props;
     return authors.map((author, index) => {
       return (
         <React.Fragment key={author.id}>
           <Link to={`${ARTIST}/${author.id}`}>
-            <span onClick={handler}>
-              {author.name}
-            </span>
+            <span onClick={handler}>{author.name}</span>
           </Link>
           {index + 1 !== authors.length && ", "}
         </React.Fragment>

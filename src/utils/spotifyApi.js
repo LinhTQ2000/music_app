@@ -1,4 +1,4 @@
-import { SPOTIFY_API, MESSAGES } from "constants/AppConstants";
+import { SPOTIFY_API, MESSAGES } from "../constants/AppConstants";
 import hasTokenExpired from "./hasTokenExpired";
 import Auth from "./auth";
 

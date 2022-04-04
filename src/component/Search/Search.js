@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 
-// import { connectSearchResults } from "containers/SearchResultsContainer";
-// import SearchResults from "./SearchResults";
+import { connectSearchResults } from "./../../containers/SearchResultsContainer";
+import SearchResults from "./SearchResults";
 import SearchInput from "./SearchInput";
 import "./../../style/Search.scss";
 
@@ -54,7 +54,7 @@ export class Search extends Component {
               />
             </CSSTransition>
           )}
-          {/* {value !== "" && isOpen && (
+          {value !== "" && isOpen && (
             <CSSTransition timeout={800} classNames="search__results">
               <SearchResults
                 value={value}
@@ -65,15 +65,14 @@ export class Search extends Component {
                 pending={pending}
               />
             </CSSTransition>
-          )} */}
+          )}
         </TransitionGroup>
       </React.Fragment>
     );
   }
 }
 
-// export default connectSearchResults(Search);
-export default Search;
+export default connectSearchResults(Search);
 
 Search.propTypes = {
   toggleSearch: PropTypes.func.isRequired,

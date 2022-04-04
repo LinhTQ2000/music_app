@@ -2,10 +2,10 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
-import cd from "images/cd.png";
-import AuthorList from "components/Common/AuthorList";
-import LazyLoad from "components/Common/LazyLoad";
-import "styles/Block.scss";
+import cd from "./../../images/cd.png";
+import "../../style/Block.scss";
+import LazyLoad from "./LazyLoad";
+import AuthorList from "./AuthorList";
 
 export default class Block extends Component {
   shouldComponentUpdate(nextProps) {
@@ -18,7 +18,7 @@ export default class Block extends Component {
   }
 
   render() {
-    const {name = "", id, image, meta, type, handler} = this.props;
+    const { name = "", id, image, meta, type, handler } = this.props;
     return (
       <div className="block">
         <div className="block__media">
@@ -27,28 +27,27 @@ export default class Block extends Component {
               className={`block__img block__img_root bg-${
                 !image ? "empty" : "center"
               }`}
-              style={{backgroundImage: `url(${image || cd})`}}
+              style={{ backgroundImage: `url(${image || cd})` }}
             ></div>
           </LazyLoad>
         </div>
         <div className="block__content">
-          <Link to={{
-            pathname: `/${type}/${id}`,
-            state: {modal: true, type},
-          }}>
-            <span
-              className="block__title"
-              onClick={handler}
-            >
+          <Link
+            to={{
+              pathname: `/${type}/${id}`,
+              state: { modal: true, type },
+            }}
+          >
+            <span className="block__title" onClick={handler}>
               {name}
             </span>
           </Link>
           <p className="block__subtitle">
-            {
-              type === "album"
-              ? <AuthorList authors={meta} handler={handler}/>
-              : meta
-            }
+            {type === "album" ? (
+              <AuthorList authors={meta} handler={handler} />
+            ) : (
+              meta
+            )}
           </p>
         </div>
       </div>
@@ -59,10 +58,7 @@ export default class Block extends Component {
 Block.propTypes = {
   image: PropTypes.string,
   name: PropTypes.string.isRequired,
-  meta: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.array,
-  ]).isRequired,
+  meta: PropTypes.oneOfType([PropTypes.string, PropTypes.array]).isRequired,
   type: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
   handler: PropTypes.func,

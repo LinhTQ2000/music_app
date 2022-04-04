@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { ReactComponent as Loader } from "images/loader.svg";
+import { ReactComponent as Loader } from "../../images/loader.svg";
 
 export default class InfiniteScroll extends Component {
   constructor(props) {
@@ -18,7 +18,7 @@ export default class InfiniteScroll extends Component {
       }
       this.container.addEventListener("scroll", this.handleOnScroll);
       this.container.addEventListener("resize", this.handleOnScroll);
-    }, 500)
+    }, 500);
   }
 
   componentWillUnmount() {
@@ -30,14 +30,8 @@ export default class InfiniteScroll extends Component {
   }
 
   handleOnScroll() {
-    const {
-      disable,
-      containerSelector,
-      dataLength,
-      total,
-      loadData,
-      pending,
-    } = this.props;
+    const { disable, containerSelector, dataLength, total, loadData, pending } =
+      this.props;
     if (disable) {
       return;
     }
@@ -53,11 +47,15 @@ export default class InfiniteScroll extends Component {
   }
 
   render() {
-    const {children, pending, hideLoader} = this.props;
+    const { children, pending, hideLoader } = this.props;
     return (
       <div>
         {children}
-        {pending && !hideLoader && <div className="loader"><Loader/></div>}
+        {pending && !hideLoader && (
+          <div className="loader">
+            <Loader />
+          </div>
+        )}
       </div>
     );
   }
