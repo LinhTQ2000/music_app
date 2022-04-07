@@ -1,20 +1,19 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
-import Carousel from "components/Common/Carousel";
-import { connectFeaturedPlaylists }
-from "containers/Playlist/FeaturedPlaylistsContainer";
+import Carousel from "../../component/Common/Carousel";
+import { connectFeaturedPlaylists } from "../../containers/Playlist/FeaturedPlaylistsContainer";
 
 export class FeaturedPlaylists extends Component {
   componentDidMount() {
-    const {playlists, loadFeaturedPlaylists} = this.props;
+    const { playlists, loadFeaturedPlaylists } = this.props;
     if (!playlists.items.length) {
       loadFeaturedPlaylists();
     }
   }
 
   render() {
-    const {pending, items, message} = this.props.playlists;
+    const { pending, items, message } = this.props.playlists;
     const blockHeader = {
       title: "Featured Playlists",
       description: message,
@@ -23,7 +22,7 @@ export class FeaturedPlaylists extends Component {
       <Carousel
         pending={pending}
         items={items}
-        type='playlist'
+        type="playlist"
         blockHeader={blockHeader}
       />
     );

@@ -2,20 +2,20 @@ import { connect } from "react-redux";
 import {
   loadFollowedArtists,
   loadMoreFollowedArtists,
-} from "actions/ArtistActions";
+} from "../../actions/ArtistActions";
 
-const mapStateToProps = store => {
+const mapStateToProps = (store) => {
   return {
     artists: store.followedArtists,
   };
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
     loadArtists: () => {
       dispatch(loadFollowedArtists());
     },
-    loadMore: lastArtistId => {
+    loadMore: (lastArtistId) => {
       dispatch(loadMoreFollowedArtists(lastArtistId));
     },
   };

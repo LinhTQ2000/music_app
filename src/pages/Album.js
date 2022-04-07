@@ -4,16 +4,16 @@ import PropTypes from "prop-types";
 import PlayButton from "./Tracklist/TracklistPlayButton";
 import Image from "./Tracklist/TracklistImage";
 import Name from "./Tracklist/TracklistName";
-import AuthorList from "components/Common/AuthorList";
-import Tracks from "components/Common/Tracks";
-import Page404 from "pages/Page404";
-import LikeButton from "components/Common/LikeButton";
-import { connectAlbum } from "containers/Album/AlbumContainer";
-import { ReactComponent as Loader } from "images/loader.svg";
+import AuthorList from "../component/Common/AuthorList";
+import Tracks from "../component/Common/Tracks";
+import Page404 from "./Page404";
+import LikeButton from "../component/Common/LikeButton";
+import { connectAlbum } from "../containers/Album/AlbumContainer";
+import { ReactComponent as Loader } from "../images/loader.svg";
 
 export class Album extends Component {
   componentDidMount() {
-    const {id, loadAlbum} = this.props;
+    const { id, loadAlbum } = this.props;
     if (this.props.album.id !== id) {
       loadAlbum(id);
     }
@@ -26,20 +26,24 @@ export class Album extends Component {
   }
 
   addToMySavedAlbums = () => {
-    const {addToMySavedAlbums, id} = this.props;
+    const { addToMySavedAlbums, id } = this.props;
     addToMySavedAlbums(id);
-  }
+  };
 
   removeFromMySavedAlbums = () => {
-    const {removeFromMySavedAlbums, id} = this.props;
+    const { removeFromMySavedAlbums, id } = this.props;
     removeFromMySavedAlbums(id);
-  }
+  };
 
   render() {
-    const {album, tracks, id} = this.props;
-    const source = {name: `album_${id}`};
+    const { album, tracks, id } = this.props;
+    const source = { name: `album_${id}` };
     if (album.pending || album.error) {
-      return <div className="tracklist__loader flex-center"><Loader /></div>;
+      return (
+        <div className="tracklist__loader flex-center">
+          <Loader />
+        </div>
+      );
     }
     if (!album.id) {
       return <Page404 />;
@@ -50,7 +54,7 @@ export class Album extends Component {
           <Image image={album.image} />
           <div className="tracklist__info">
             <div className="tracklist__authors">
-              <AuthorList authors={album.authors}/>
+              <AuthorList authors={album.authors} />
             </div>
             <Name name={album.name} />
             <ul className="tracklist__additional-info">
@@ -74,10 +78,7 @@ export class Album extends Component {
           </div>
         </header>
         <div className="tracklist">
-          <Tracks
-            trackList={tracks}
-            source={source}
-          />
+          <Tracks trackList={tracks} source={source} />
         </div>
       </div>
     );

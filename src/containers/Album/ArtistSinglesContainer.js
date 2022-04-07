@@ -2,17 +2,17 @@ import { connect } from "react-redux";
 import {
   loadArtistSingles,
   loadMoreArtistSingles,
-} from "actions/AlbumActions";
+} from "../../actions/AlbumActions";
 
-const mapStateToProps = store => {
+const mapStateToProps = (store) => {
   return {
     singles: store.artistSingles,
   };
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    loadSingles: artistId => {
+    loadSingles: (artistId) => {
       dispatch(loadArtistSingles(artistId));
     },
     loadMore: (artistId, offset) => {

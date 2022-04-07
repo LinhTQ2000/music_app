@@ -1,10 +1,9 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
 
-import Carousel from "components/Common/Carousel";
-import { CATEGORY_PLAYLISTS } from "constants/RouteConstants";
-import { connectCategoryPlaylists }
-from "containers/Playlist/CategoryPlaylistsContainer";
+import Carousel from "../../component/Common/Carousel";
+import { CATEGORY_PLAYLISTS } from "../../constants/RouteConstant";
+import { connectCategoryPlaylists } from "../../containers/Playlist/CategoryPlaylistsContainer";
 
 export class CategoryPlaylists extends Component {
   componentDidMount() {
@@ -12,7 +11,7 @@ export class CategoryPlaylists extends Component {
   }
 
   render() {
-    const {pending, items, categoryName, categoryId} = this.props.playlists;
+    const { pending, items, categoryName, categoryId } = this.props.playlists;
     const blockHeader = {
       title: categoryName,
       description: "You May Like",
@@ -22,7 +21,7 @@ export class CategoryPlaylists extends Component {
       <Carousel
         pending={pending}
         items={items}
-        type='playlist'
+        type="playlist"
         blockHeader={blockHeader}
       />
     );

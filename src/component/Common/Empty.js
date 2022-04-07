@@ -1,9 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { ReactComponent as Clef } from "images/clef.svg";
+import { ReactComponent as Clef } from "../../images/clef.svg";
 
 export default function EmptyPage(props) {
-  const {title, button = null} = props;
+  const { title, button = null } = props;
   return (
     <div className="empty-page flex-center">
       <div>

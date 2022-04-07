@@ -2,9 +2,9 @@ import React, { Component } from "react";
 import Slider from "react-slick";
 import PropTypes from "prop-types";
 
-import BlockHeader from "components/Common/BlockHeader";
-import Block from "components/Common/Block";
-import SkeletonBlocks from "components/Skeleton/SkeletonBlocks";
+import BlockHeader from "./BlockHeader";
+import Block from "./Block";
+import SkeletonBlocks from "../Skeleton/SkeletonBlocks";
 
 export default class Carousel extends Component {
   carouselConfig() {
@@ -39,29 +39,18 @@ export default class Carousel extends Component {
   }
 
   renderSlider() {
-    const {items, type} = this.props;
+    const { items, type } = this.props;
     if (!items.length) {
       return null;
     }
     const sliderItems = items.map((item, index) => {
-      return (
-        <Block
-          key={index}
-          id={item.id}
-          type={type}
-          {...item}
-        />
-      );
+      return <Block key={index} id={item.id} type={type} {...item} />;
     });
-    return (
-      <Slider {...this.carouselConfig()}>
-        {sliderItems}
-      </Slider>
-    );
+    return <Slider {...this.carouselConfig()}>{sliderItems}</Slider>;
   }
 
   render() {
-    const {pending, blockHeader} = this.props;
+    const { pending, blockHeader } = this.props;
     if (pending) {
       return (
         <SkeletonBlocks
@@ -74,13 +63,10 @@ export default class Carousel extends Component {
     return (
       <section>
         <BlockHeader {...blockHeader} />
-        <div className="carousel">
-          {this.renderSlider()}
-        </div>
+        <div className="carousel">{this.renderSlider()}</div>
       </section>
     );
   }
-
 }
 
 Carousel.propTypes = {

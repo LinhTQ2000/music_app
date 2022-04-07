@@ -1,15 +1,15 @@
 import { connect } from "react-redux";
-import { loadArtistTopTracks } from "actions/TrackActions";
+import { loadArtistTopTracks } from "../../actions/TrackActions";
 
-const mapStateToProps = store => {
+const mapStateToProps = (store) => {
   return {
     tracks: store.artistTopTracks,
   };
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    loadTopTracks: artistId => {
+    loadTopTracks: (artistId) => {
       dispatch(loadArtistTopTracks(artistId));
     },
   };

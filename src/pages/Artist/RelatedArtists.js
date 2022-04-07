@@ -1,11 +1,10 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
-import Artist from "components/Common/Artist";
-import BlockHeader from "components/Common/BlockHeader";
-import SkeletonArtists from "components/Skeleton/SkeletonArtists";
-import { connectRelatedArtists }
-from "containers/Artist/RelatedArtistsContainer";
+import Artist from "../../component/Common/Artist";
+import BlockHeader from "../../component/Common/BlockHeader";
+import SkeletonArtists from "../../component/Skeleton/SkeletonArtists";
+import { connectRelatedArtists } from "../../containers/Artist/RelatedArtistsContainer";
 
 export class RelatedArtists extends Component {
   componentDidMount() {
@@ -13,14 +12,14 @@ export class RelatedArtists extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    const {id, loadRelatedArtists} = this.props;
+    const { id, loadRelatedArtists } = this.props;
     if (id !== prevProps.id) {
       loadRelatedArtists(id);
     }
   }
 
   render() {
-    const {pending, items} = this.props.artists;
+    const { pending, items } = this.props.artists;
     if (pending) {
       return (
         <SkeletonArtists
@@ -35,9 +34,9 @@ export class RelatedArtists extends Component {
     }
     return (
       <section>
-        <BlockHeader title='Related Artists'/>
+        <BlockHeader title="Related Artists" />
         <section className="artists artists_cols-6">
-          {items.map(item => {
+          {items.map((item) => {
             return (
               <Artist
                 key={item.id}

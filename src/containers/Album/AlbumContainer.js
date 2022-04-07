@@ -3,30 +3,27 @@ import {
   loadAlbum,
   addToMySavedAlbums,
   removeFromMySavedAlbums,
-} from "actions/AlbumActions";
+} from "../../actions/AlbumActions";
 
-const mapStateToProps = store => {
+const mapStateToProps = (store) => {
   return {
     album: store.album,
     tracks: store.album.items,
   };
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    loadAlbum: albumId => {
+    loadAlbum: (albumId) => {
       dispatch(loadAlbum(albumId));
     },
-    addToMySavedAlbums: albumIds => {
+    addToMySavedAlbums: (albumIds) => {
       dispatch(addToMySavedAlbums([albumIds]));
     },
-    removeFromMySavedAlbums: albumIds => {
+    removeFromMySavedAlbums: (albumIds) => {
       dispatch(removeFromMySavedAlbums([albumIds]));
     },
   };
 };
 
-export const connectAlbum = connect(
-  mapStateToProps,
-  mapDispatchToProps
-);
+export const connectAlbum = connect(mapStateToProps, mapDispatchToProps);

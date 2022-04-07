@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
-import { connectArtistSingles } from "containers/Album/ArtistSinglesContainer";
-import { SINGLES, ARTIST } from "constants/RouteConstants";
-import Carousel from "components/Common/Carousel";
+import { connectArtistSingles } from "../../containers/Album/ArtistSinglesContainer";
+import { SINGLES, ARTIST } from "../../constants/RouteConstant";
+import Carousel from "../../component/Common/Carousel";
 
 export class ArtistSingles extends Component {
   componentDidMount() {
@@ -11,15 +11,15 @@ export class ArtistSingles extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    const {id, loadSingles} = this.props;
+    const { id, loadSingles } = this.props;
     if (id !== prevProps.id) {
       loadSingles(id);
     }
   }
 
   render() {
-    const {pending, items, total} = this.props.singles;
-    const blockHeader = {title: "Singles"};
+    const { pending, items, total } = this.props.singles;
+    const blockHeader = { title: "Singles" };
     if (items.length < total) {
       blockHeader.link = `${ARTIST}/${this.props.id}${SINGLES}`;
     }
@@ -30,7 +30,7 @@ export class ArtistSingles extends Component {
       <Carousel
         pending={pending}
         items={items}
-        type='album'
+        type="album"
         blockHeader={blockHeader}
       />
     );

@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 
-import { loadMorePlaylistTracks } from "actions/TrackActions";
+import { loadMorePlaylistTracks } from "../../actions/TrackActions";
 import {
   loadPlaylist,
   followPlaylist,
@@ -8,23 +8,23 @@ import {
   uploadCoverImage,
   changePlaylistDetails,
   removeTracksFromPlaylist,
-} from "actions/PlaylistActions";
+} from "../../actions/PlaylistActions";
 
-const mapStateToProps = store => {
+const mapStateToProps = (store) => {
   return {
     playlist: store.playlist,
   };
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    loadPlaylist: playlistId => {
+    loadPlaylist: (playlistId) => {
       dispatch(loadPlaylist(playlistId));
     },
     followPlaylist: (playlistId, playlist) => {
       dispatch(followPlaylist(playlistId, playlist));
     },
-    unfollowPlaylist: playlistId => {
+    unfollowPlaylist: (playlistId) => {
       dispatch(unfollowPlaylist(playlistId));
     },
     uploadCoverImage: (playlistId, image) => {
@@ -42,7 +42,4 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export const connectPlaylist = connect(
-  mapStateToProps,
-  mapDispatchToProps
-);
+export const connectPlaylist = connect(mapStateToProps, mapDispatchToProps);

@@ -1,16 +1,15 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
 
-import Block from "components/Common/Block";
-import BlockHeader from "components/Common/BlockHeader";
-import InfiniteScroll from "components/Common/InfiniteScroll";
-import SkeletonBlocks from "components/Skeleton/SkeletonBlocks";
-import { connectCategoryPlaylists }
-from "containers/Playlist/CategoryPlaylistsContainer";
+import Block from "../component/Common/Block";
+import BlockHeader from "../component/Common/BlockHeader";
+import InfiniteScroll from "../component/Common/InfiniteScroll";
+import SkeletonBlocks from "../component/Skeleton/SkeletonBlocks";
+import { connectCategoryPlaylists } from "../containers/Playlist/CategoryPlaylistsContainer";
 
 export class CategoryPlaylists extends Component {
   componentDidMount() {
-    const {loadPlaylists, match, playlists} = this.props;
+    const { loadPlaylists, match, playlists } = this.props;
     window.scrollTo(0, 0);
     if (match.params.id !== playlists.categoryId) {
       loadPlaylists({
@@ -20,43 +19,37 @@ export class CategoryPlaylists extends Component {
   }
 
   render() {
-    const {
-      categoryName,
-      total,
-      loadMorePending,
-      pending,
-      items,
-      error,
-    } = this.props.playlists;
-    const {id} = this.props.match.params;
+    const { categoryName, total, loadMorePending, pending, items, error } =
+      this.props.playlists;
+    const { id } = this.props.match.params;
     const loadMore = () => this.props.loadMore(id, items.length);
     if (pending || error) {
       return <SkeletonBlocks />;
     }
     return (
       <section>
-        <BlockHeader title={categoryName}/>
-          <InfiniteScroll
-            total={total}
-            dataLength={items.length}
-            loadData={loadMore}
-            pending={loadMorePending}
-          >
-            <div className="blocks-container">
-              {items.map((item, index) => {
-                return (
-                  <Block
-                    key={item.id}
-                    type="playlist"
-                    id={item.id}
-                    meta={item.meta}
-                    name={item.name}
-                    image={item.image}
-                  />
-                );
-              })}
-            </div>
-          </InfiniteScroll>
+        <BlockHeader title={categoryName} />
+        <InfiniteScroll
+          total={total}
+          dataLength={items.length}
+          loadData={loadMore}
+          pending={loadMorePending}
+        >
+          <div className="blocks-container">
+            {items.map((item, index) => {
+              return (
+                <Block
+                  key={item.id}
+                  type="playlist"
+                  id={item.id}
+                  meta={item.meta}
+                  name={item.name}
+                  image={item.image}
+                />
+              );
+            })}
+          </div>
+        </InfiniteScroll>
       </section>
     );
   }

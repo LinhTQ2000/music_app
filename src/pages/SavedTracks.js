@@ -2,17 +2,17 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
-import EmptyPage from "components/Common/Empty";
-import BlockHeader from "components/Common/BlockHeader";
-import Tracks from "components/Common/Tracks";
-import InfiniteScroll from "components/Common/InfiniteScroll";
-import SkeletonTracks from "components/Skeleton/SkeletonTracks";
-import { CHARTS } from "constants/RouteConstants";
-import { connectSavedTracks } from "containers/Tracks/SavedTracksContainer";
+import EmptyPage from "../component/Common/Empty";
+import BlockHeader from "../component/Common/BlockHeader";
+import Tracks from "../component/Common/Tracks";
+import InfiniteScroll from "../component/Common/InfiniteScroll";
+import SkeletonTracks from "../component/Skeleton/SkeletonTracks";
+import { CHARTS } from "../constants/RouteConstant";
+import { connectSavedTracks } from "../containers/Tracks/SavedTracksContainer";
 
 export class SavedTracks extends Component {
   componentDidMount() {
-    const {tracks, loadMySavedTracks} = this.props;
+    const { tracks, loadMySavedTracks } = this.props;
     window.scrollTo(0, 0);
     if (!tracks.loaded) {
       loadMySavedTracks();
@@ -24,10 +24,7 @@ export class SavedTracks extends Component {
       <EmptyPage
         title="Your favourite songs will appear here"
         button={
-          <Link
-            className="empty-page__button flex-center"
-            to={CHARTS}
-          >
+          <Link className="empty-page__button flex-center" to={CHARTS}>
             Popular Songs
           </Link>
         }
@@ -36,18 +33,19 @@ export class SavedTracks extends Component {
   }
 
   render() {
-    const {pending, loadMorePending, total, items, error, loaded} = this.props.tracks;
+    const { pending, loadMorePending, total, items, error, loaded } =
+      this.props.tracks;
     const loadMore = () => this.props.loadMore(items.length);
-    const source = {name: "LikedTracks"};
+    const source = { name: "LikedTracks" };
     if (pending || (error && !loaded)) {
-      return <SkeletonTracks header={true}/>;
+      return <SkeletonTracks header={true} />;
     }
     if (!total && loaded) {
       return this.renderEmptyPage();
     }
     return (
       <section>
-        <BlockHeader title='Favorite Songs' />
+        <BlockHeader title="Favorite Songs" />
         <div>
           <InfiniteScroll
             total={total}

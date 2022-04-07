@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
-import cd from "images/cd.png";
+import cd from "../../images/cd.png";
 import EditableImage from "./TracklistEditableImage";
 
 export default class Image extends Component {
@@ -10,19 +10,16 @@ export default class Image extends Component {
   }
 
   render() {
-    const {image, uploadCoverImage, isEditableImage} = this.props;
+    const { image, uploadCoverImage, isEditableImage } = this.props;
     if (isEditableImage) {
       return (
-        <EditableImage
-          image={image}
-          uploadCoverImage={uploadCoverImage}
-        />
+        <EditableImage image={image} uploadCoverImage={uploadCoverImage} />
       );
     }
     return (
       <div
         className={`tracklist__cover-art bg-${!image ? "empty" : "center"}`}
-        style={{ backgroundImage: `url(${image || cd})`}}
+        style={{ backgroundImage: `url(${image || cd})` }}
       ></div>
     );
   }

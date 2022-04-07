@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { connectArtistHeader } from "containers/Artist/ArtistHeaderContainer";
+import { connectArtistHeader } from "../../containers/Artist/ArtistHeaderContainer";
 
 export class ArtistHeader extends Component {
   componentDidMount() {
@@ -8,7 +8,7 @@ export class ArtistHeader extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    const {id, loadArtist} = this.props;
+    const { id, loadArtist } = this.props;
     if (id !== prevProps.id) {
       loadArtist(id);
     }
@@ -16,18 +16,18 @@ export class ArtistHeader extends Component {
 
   follow = () => {
     this.props.followArtist(this.props.artist);
-  }
+  };
 
   unfollow = () => {
     this.props.unfollowArtist(this.props.id);
-  }
+  };
 
   render() {
-    const {image, name, followers, isFollower} = this.props.artist;
+    const { image, name, followers, isFollower } = this.props.artist;
     return (
       <header
         className="artist-header bg-center flex-center"
-        style={{backgroundImage: `url(${image})`}}
+        style={{ backgroundImage: `url(${image})` }}
       >
         <div className="artist-header__info">
           <p className="artist-header__followers">{followers}</p>

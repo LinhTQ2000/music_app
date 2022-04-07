@@ -1,38 +1,40 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Redirect } from "react-router-dom";
-import { ReactComponent as AddPlaylistIcon } from "images/addPlaylist.svg";
+import { Navigate } from "react-router-dom";
+import { ReactComponent as AddPlaylistIcon } from "../../images/addPlaylist.svg";
 
 export default class NewPlaylistBlock extends Component {
   state = {
     newPlaylistPath: "",
-  }
+  };
 
   componentDidUpdate(prevProps, prevState) {
-    if (this.state.newPlaylistPath &&
-      prevState.newPlaylistPath === this.state.newPlaylistPath) {
+    if (
+      this.state.newPlaylistPath &&
+      prevState.newPlaylistPath === this.state.newPlaylistPath
+    ) {
       this.setState({
         newPlaylistPath: "",
       });
     }
   }
 
-  setPath = id => {
+  setPath = (id) => {
     this.setState({
       newPlaylistPath: `/playlist/${id}`,
     });
-  }
+  };
 
-  handleSubmit = event => {
+  handleSubmit = (event) => {
     event.preventDefault();
     this.props.createPlaylist("New Playlist", this.setPath);
-  }
+  };
 
   render() {
-    const {isNewPlaylistOpen, renderContent} = this.props;
+    const { isNewPlaylistOpen, renderContent } = this.props;
     if (this.state.newPlaylistPath && !isNewPlaylistOpen) {
       return (
-        <Redirect
+        <Navigate
           push
           to={{
             pathname: this.state.newPlaylistPath,
@@ -46,10 +48,7 @@ export default class NewPlaylistBlock extends Component {
       );
     }
     if (renderContent) {
-      return renderContent(
-        this.handleSubmit,
-        <AddPlaylistIcon />
-      );
+      return renderContent(this.handleSubmit, <AddPlaylistIcon />);
     }
     return (
       <div className="add-playlist block">
@@ -61,9 +60,7 @@ export default class NewPlaylistBlock extends Component {
             <div className="add-playlist__icon">
               <AddPlaylistIcon />
             </div>
-            <h6 className="add-playlist__title">
-              Create New Playlist
-            </h6>
+            <h6 className="add-playlist__title">Create New Playlist</h6>
           </div>
         </div>
       </div>

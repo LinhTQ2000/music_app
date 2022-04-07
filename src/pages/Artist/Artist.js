@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import { Route, Switch } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 
-import { ALBUMS, SINGLES, ARTIST } from "constants/RouteConstants";
+import { ALBUMS, SINGLES, ARTIST } from "../../constants/RouteConstant";
 import ArtistHeader from "./ArtistHeader";
 import ArtistTopTracks from "./ArtistTopTracks";
 import ArtistAlbums from "./ArtistAlbums";
@@ -9,7 +9,7 @@ import ArtistSingles from "./ArtistSingles";
 import RelatedArtists from "./RelatedArtists";
 import Albums from "../ArtistAlbums";
 import Singles from "../ArtistSingles";
-import "styles/Artist.scss";
+import "../../style/Artist.scss";
 
 export default class Artist extends Component {
   componentDidUpdate(prevProps) {
@@ -23,9 +23,9 @@ export default class Artist extends Component {
   }
 
   render() {
-    const {id} = this.props.match.params;
+    const { id } = this.props.match.params;
     return (
-      <Switch location={this.props.location}>
+      <Routes location={this.props.location}>
         <Route exact path={`${ARTIST}/${id}`}>
           <section className="section-separators">
             <ArtistHeader id={id} />
@@ -47,7 +47,7 @@ export default class Artist extends Component {
             return <Singles id={id} />;
           }}
         />
-      </Switch>
+      </Routes>
     );
   }
 }

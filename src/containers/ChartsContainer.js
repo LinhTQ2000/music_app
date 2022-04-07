@@ -1,11 +1,11 @@
 import { connect } from "react-redux";
 
-import { filterByCountry } from "actions/ChartActions";
-import { TOP_50 } from "constants/PlaylistIds";
-import { loadMoreTopTracks } from "actions/TrackActions";
-import countries from "utils/getCountryList";
+import { filterByCountry } from "../actions/ChartActions";
+import { TOP_50 } from "../constants/PlayListIds";
+import { loadMoreTopTracks } from "../actions/TrackActions";
+import countries from "../utils/getCountryList";
 
-const mapStateToProps = store => {
+const mapStateToProps = (store) => {
   return {
     tracks: store.topTracks,
     charts: store.charts,
@@ -13,7 +13,7 @@ const mapStateToProps = store => {
   };
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
     filterByCountry: (countryName = "global") => {
       const country = countryName.toLowerCase().split(" ").join("_");
@@ -31,7 +31,4 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export const connectCharts = connect(
-  mapStateToProps,
-  mapDispatchToProps
-);
+export const connectCharts = connect(mapStateToProps, mapDispatchToProps);

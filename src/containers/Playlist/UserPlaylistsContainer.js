@@ -1,24 +1,24 @@
 import { connect } from "react-redux";
 
-import { USER_PLAYLISTS } from "constants/ActionConstants";
+import { USER_PLAYLISTS } from "../../constants/ActionConstants";
 import {
   loadUserPlaylists,
   loadMoreUserPlaylists,
   createPlaylist,
-} from "actions/PlaylistActions";
+} from "../../actions/PlaylistActions";
 
-const mapStateToProps = store => {
+const mapStateToProps = (store) => {
   return {
     playlists: store.userPlaylists,
   };
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
     loadUserPlaylists: () => {
       dispatch(loadUserPlaylists(USER_PLAYLISTS));
     },
-    loadMore: offset => {
+    loadMore: (offset) => {
       dispatch(loadMoreUserPlaylists(USER_PLAYLISTS, offset));
     },
     createPlaylist: (playlistName, redirect) => {

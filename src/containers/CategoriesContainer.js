@@ -1,27 +1,21 @@
 import { connect } from "react-redux";
-import {
-  loadCategories,
-  loadMoreCategories,
-} from "actions/CategoryActions";
+import { loadCategories, loadMoreCategories } from "../actions/CategoryActions";
 
-const mapStateToProps = store => {
+const mapStateToProps = (store) => {
   return {
     categories: store.categories,
   };
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    loadCategories: limit => {
+    loadCategories: (limit) => {
       dispatch(loadCategories(limit));
     },
-    loadMore: offset => {
+    loadMore: (offset) => {
       dispatch(loadMoreCategories(offset));
     },
   };
 };
 
-export const connectCategories = connect(
-  mapStateToProps,
-  mapDispatchToProps
-);
+export const connectCategories = connect(mapStateToProps, mapDispatchToProps);

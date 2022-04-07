@@ -3,17 +3,17 @@ import {
   loadCategoryPlaylists,
   loadMoreCategoryPlaylists,
   loadRandomCategoryPlaylists,
-} from "actions/PlaylistActions";
+} from "../../actions/PlaylistActions";
 
-const mapStateToProps = store => {
+const mapStateToProps = (store) => {
   return {
     playlists: store.categoryPlaylists,
   };
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    loadPlaylists: playlistId => {
+    loadPlaylists: (playlistId) => {
       dispatch(loadCategoryPlaylists(playlistId));
     },
     loadRandomPlaylists: () => {

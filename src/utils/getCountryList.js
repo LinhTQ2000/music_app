@@ -1,4 +1,4 @@
-import { TOP_50 } from "../constants/PlaylistIds";
+import { TOP_50 } from "../constants/PlayListIds";
 
 const countries = [];
 for (let country in TOP_50) {

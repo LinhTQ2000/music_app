@@ -3,29 +3,26 @@ import {
   loadArtist,
   followArtist,
   unfollowArtist,
-} from "actions/ArtistActions";
+} from "../../actions/ArtistActions";
 
-const mapStateToProps = store => {
+const mapStateToProps = (store) => {
   return {
     artist: store.artist,
   };
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    loadArtist: artistId => {
+    loadArtist: (artistId) => {
       dispatch(loadArtist(artistId));
     },
-    followArtist: artist => {
+    followArtist: (artist) => {
       dispatch(followArtist(artist));
     },
-    unfollowArtist: artistId => {
+    unfollowArtist: (artistId) => {
       dispatch(unfollowArtist(artistId));
     },
   };
 };
 
-export const connectArtistHeader = connect(
-  mapStateToProps,
-  mapDispatchToProps
-);
+export const connectArtistHeader = connect(mapStateToProps, mapDispatchToProps);

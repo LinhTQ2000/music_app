@@ -1,16 +1,16 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
-import BlockHeader from "components/Common/BlockHeader";
-import InfiniteScroll from "components/Common/InfiniteScroll";
-import Category from "components/Common/Category";
-import SkeletonCategories from "components/Skeleton/SkeletonCategories";
-import { connectCategories } from "containers/CategoriesContainer";
-import "styles/Category.scss";
+import BlockHeader from "../component/Common/BlockHeader";
+import InfiniteScroll from "../component/Common/InfiniteScroll";
+import Category from "../component/Common/Category";
+import SkeletonCategories from "../component/Skeleton/SkeletonCategories";
+import { connectCategories } from "../containers/CategoriesContainer";
+import "../style/Category.scss";
 
 export class Categories extends Component {
   componentDidMount() {
-    const {categories, loadCategories} = this.props;
+    const { categories, loadCategories } = this.props;
     window.scrollTo(0, 0);
     if (!categories.items.length) {
       loadCategories();
@@ -18,14 +18,15 @@ export class Categories extends Component {
   }
 
   render() {
-    const {pending, total, loadMorePending, items, error} = this.props.categories;
+    const { pending, total, loadMorePending, items, error } =
+      this.props.categories;
     const loadMore = () => this.props.loadMore(items.length);
     if (pending || error) {
-      return <SkeletonCategories preview={false}/>;
+      return <SkeletonCategories preview={false} />;
     }
     return (
       <div className="categories">
-        <BlockHeader title='Genres & Moods'/>
+        <BlockHeader title="Genres & Moods" />
         <InfiniteScroll
           total={total}
           dataLength={items.length}

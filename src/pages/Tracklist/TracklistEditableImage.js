@@ -1,15 +1,15 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
-import alert from "components/Common/Alert/Alert";
-import cd from "images/cd.png";
+import alert from "../../component/Common/Alert/Alert";
+import cd from "../../images/cd.png";
 
 export default class EditableImage extends Component {
   shouldComponentUpdate(nextProps) {
     return nextProps.image !== this.props.image;
   }
 
-  uploadCoverImage = el => {
+  uploadCoverImage = (el) => {
     if (!el.target.files.length) {
       return;
     }
@@ -27,14 +27,14 @@ export default class EditableImage extends Component {
     reader.onload = () => {
       this.props.uploadCoverImage(reader.result);
     };
-  }
+  };
 
   render() {
-    const {image} = this.props;
+    const { image } = this.props;
     return (
       <div
         className={`tracklist__cover-art bg-${!image ? "empty" : "center"}`}
-        style={{backgroundImage: `url(${image || cd})`}}
+        style={{ backgroundImage: `url(${image || cd})` }}
       >
         <button
           className="tracklist__upload-cover"
@@ -42,7 +42,7 @@ export default class EditableImage extends Component {
         >
           Change Cover Image
           <input
-            ref={el => (this.uploadCoverInput = el)}
+            ref={(el) => (this.uploadCoverInput = el)}
             type="file"
             className="tracklist__upload-cover-input"
             onChange={this.uploadCoverImage}

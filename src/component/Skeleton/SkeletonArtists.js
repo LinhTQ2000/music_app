@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import SkeletonBlockHeader from "./SkeletonBlockHeader";
-import "styles/Skeleton.scss";
+import "../../style/Skeleton.scss";
 
 export default function SkeletonArtists(props) {
   const {

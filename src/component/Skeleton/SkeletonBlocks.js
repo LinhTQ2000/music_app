@@ -1,22 +1,19 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import "styles/Skeleton.scss";
+import "../../style/Skeleton.scss";
 import SkeletonBlockHeader from "./SkeletonBlockHeader";
 
 export default function SkeletonBlocks(props) {
-  const {
-    className = "grid",
-    itemCount = 8,
-    headerWithDescription,
-  } = props;
+  const { className = "grid", itemCount = 8, headerWithDescription } = props;
   return (
-    <section className='skeleton_blocks'>
+    <section className="skeleton_blocks">
       <SkeletonBlockHeader description={headerWithDescription} />
-      <div className={`
+      <div
+        className={`
         skeleton__blocks-container
-        skeleton__blocks-container_${className}`
-      }>
+        skeleton__blocks-container_${className}`}
+      >
         {[...Array(itemCount).keys()].map((item, index) => {
           return (
             <div className="skeleton__block" key={index}>

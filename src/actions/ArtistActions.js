@@ -4,28 +4,24 @@ import {
   RELATED_ARTISTS,
   FOLLOW_ARTIST,
   UNFOLLOW_ARTIST,
-} from "constants/ActionConstants";
-import {
-  FOLLOWED_ARTISTS_LIMIT,
-  MESSAGES,
-} from "constants/AppConstants";
-import makeActionCreator from "utils/makeActionCreator";
-import transformResponse from "utils/transformResponse";
-import spotifyQuery from "utils/spotifyApi";
-import changeNumFormat from "utils/changeNumFormat";
-import alert from "components/Common/Alert/Alert";
+} from "../constants/ActionConstants";
+import { FOLLOWED_ARTISTS_LIMIT, MESSAGES } from "../constants/AppConstants";
+import makeActionCreator from "../utils/makeActionCreator";
+import transformResponse from "../utils/transformResponse";
+import spotifyQuery from "../utils/spotifyApi";
+import changeNumFormat from "../utils/changeNumFormat";
+import alert from "../component/Common/Alert/Alert";
 
 export function loadFollowedArtists() {
-  return async dispatch => {
+  return async (dispatch) => {
     const pending = makeActionCreator(FOLLOWED_ARTISTS.PENDING);
     const success = makeActionCreator(FOLLOWED_ARTISTS.SUCCESS, "payload");
     const error = makeActionCreator(FOLLOWED_ARTISTS.ERROR);
     try {
       dispatch(pending());
-      const response = await spotifyQuery(
-        "getFollowedArtists",
-        [{limit: FOLLOWED_ARTISTS_LIMIT}]
-      );
+      const response = await spotifyQuery("getFollowedArtists", [
+        { limit: FOLLOWED_ARTISTS_LIMIT },
+      ]);
       dispatch(
         success({
           items: transformResponse.artists(response.artists.items),
@@ -43,7 +39,7 @@ export function loadFollowedArtists() {
 }
 
 export function loadMoreFollowedArtists(after = 0) {
-  return async dispatch => {
+  return async (dispatch) => {
     const pending = makeActionCreator(FOLLOWED_ARTISTS.LOAD_MORE_PENDING);
     const success = makeActionCreator(
       FOLLOWED_ARTISTS.LOAD_MORE_SUCCESS,
@@ -52,10 +48,9 @@ export function loadMoreFollowedArtists(after = 0) {
     const error = makeActionCreator(FOLLOWED_ARTISTS.LOAD_MORE_ERROR);
     try {
       dispatch(pending());
-      const response = await spotifyQuery(
-        "getFollowedArtists",
-        [{limit: FOLLOWED_ARTISTS_LIMIT, after}]
-      );
+      const response = await spotifyQuery("getFollowedArtists", [
+        { limit: FOLLOWED_ARTISTS_LIMIT, after },
+      ]);
       dispatch(
         success({
           items: transformResponse.artists(response.artists.items),
@@ -71,30 +66,21 @@ export function loadMoreFollowedArtists(after = 0) {
 }
 
 export function loadArtist(artistId) {
-  return async dispatch => {
+  return async (dispatch) => {
     const pending = makeActionCreator(ARTIST.PENDING);
     const success = makeActionCreator(ARTIST.SUCCESS, "payload");
     const error = makeActionCreator(ARTIST.ERROR);
     try {
       dispatch(pending());
-      const artist = await spotifyQuery(
-        "getArtist",
-        [artistId]
-      );
-      const isFollower = await spotifyQuery(
-        "isFollowingArtists",
-        [[artistId]]
-      );
+      const artist = await spotifyQuery("getArtist", [artistId]);
+      const isFollower = await spotifyQuery("isFollowingArtists", [[artistId]]);
       dispatch(
         success({
           ...artist,
           isFollower: isFollower[0],
           followers: `
             ${changeNumFormat(artist.followers.total)} 
-            ${artist.followers.total === 1
-              ? "follower"
-              : "followers"
-            }
+            ${artist.followers.total === 1 ? "follower" : "followers"}
           `,
         })
       );
@@ -106,7 +92,7 @@ export function loadArtist(artistId) {
 }
 
 export function loadRelatedArtists(id = "") {
-  return async dispatch => {
+  return async (dispatch) => {
     const pending = makeActionCreator(RELATED_ARTISTS.PENDING);
     const success = makeActionCreator(RELATED_ARTISTS.SUCCESS, "payload");
     const error = makeActionCreator(RELATED_ARTISTS.ERROR);
@@ -120,17 +106,15 @@ export function loadRelatedArtists(id = "") {
       } else {
         artistId = id;
       }
-      const relatedArtists = await spotifyQuery(
-        "getArtistRelatedArtists",
-        [artistId]
-      );
+      const relatedArtists = await spotifyQuery("getArtistRelatedArtists", [
+        artistId,
+      ]);
       dispatch(
         success({
           artistName,
-          items: transformResponse.artists(
-            relatedArtists.artists,
-            {imageIndex: 2}
-          ).slice(0, 12),
+          items: transformResponse
+            .artists(relatedArtists.artists, { imageIndex: 2 })
+            .slice(0, 12),
         })
       );
     } catch (e) {
@@ -154,7 +138,7 @@ async function getRandomArtist() {
 }
 
 export function followArtist(artist) {
-  return async dispatch => {
+  return async (dispatch) => {
     const success = makeActionCreator(FOLLOW_ARTIST);
     try {
       await spotifyQuery("followArtists", [[artist.id]]);
@@ -168,7 +152,7 @@ export function followArtist(artist) {
 }
 
 export function unfollowArtist(artistId) {
-  return async dispatch => {
+  return async (dispatch) => {
     const success = makeActionCreator(UNFOLLOW_ARTIST, "payload");
     try {
       await spotifyQuery("unfollowArtists", [[artistId]]);

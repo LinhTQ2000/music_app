@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { withRouter } from "react-router-dom";
-import "styles/Tracklist.scss";
+// import { withRouter } from "react-router-dom";
+import "../../style/Tracklist.scss";
 
 export class TracklistModal extends Component {
   componentDidMount() {
@@ -13,25 +13,20 @@ export class TracklistModal extends Component {
     document.body.classList.remove("disable-scroll");
   }
 
-  goBack = e => {
+  goBack = (e) => {
     if (e.target.closest(".tracklist__modal")) {
       return;
     }
     this.props.history.goBack();
-  }
+  };
 
   render() {
     return (
-      <div
-        className="tracklist__overlay"
-        onClick={this.goBack}
-      >
-        <div className="tracklist__modal">
-          {this.props.children}
-        </div>
+      <div className="tracklist__overlay" onClick={this.goBack}>
+        <div className="tracklist__modal">{this.props.children}</div>
       </div>
     );
   }
 }
 
-export default withRouter(TracklistModal);
+export default TracklistModal;

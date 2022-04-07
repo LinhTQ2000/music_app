@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import Tracks from "components/Common/Tracks";
+import Tracks from "../../component/Common/Tracks";
 
 export default class ChartTracks extends Component {
   shouldComponentUpdate(nextProps) {
@@ -8,15 +8,9 @@ export default class ChartTracks extends Component {
   }
 
   render() {
-    const {tracks, playlistId} = this.props;
-    const source = {name: `ChartTracks_${playlistId}`};
-    return (
-      <Tracks
-        charts={true}
-        trackList={tracks}
-        source={source}
-      />
-    );
+    const { tracks, playlistId } = this.props;
+    const source = { name: `ChartTracks_${playlistId}` };
+    return <Tracks charts={true} trackList={tracks} source={source} />;
   }
 }
 

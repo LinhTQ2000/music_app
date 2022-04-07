@@ -2,27 +2,27 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { ChevronDown } from "react-feather";
 
-import { ReactComponent as Loader } from "images/loader.svg";
-import BlockHeader from "components/Common/BlockHeader";
-import OpenContextMenuButton from "components/Common/OpenContextMenuButton";
-import ContextMenuItems from "components/Common/ContextMenuItems";
-import InfiniteScroll from "components/Common/InfiniteScroll";
+import { ReactComponent as Loader } from "../../images/loader.svg";
+import BlockHeader from "../../component/Common/BlockHeader";
+import OpenContextMenuButton from "../../component/Common/OpenContextMenuButton";
+import ContextMenuItems from "../../component/Common/ContextMenuItems";
+import InfiniteScroll from "../../component/Common/InfiniteScroll";
 import ChartTracks from "./ChartTracks";
-import { connectCharts } from "containers/ChartsContainer";
-import "styles/Select.scss";
+import { connectCharts } from "../../containers/ChartsContainer";
+import "../../style/Select.scss";
 
 export class Charts extends Component {
   componentDidMount() {
-    const {tracks, filterByCountry} = this.props;
+    const { tracks, filterByCountry } = this.props;
     window.scrollTo(0, 0);
     if (!tracks.items.length) {
       filterByCountry();
     }
   }
 
-  renderContextMenu = closeMenu => {
-    const {filterByCountry, countries} = this.props;
-    const handler = country => {
+  renderContextMenu = (closeMenu) => {
+    const { filterByCountry, countries } = this.props;
+    const handler = (country) => {
       filterByCountry(country.name);
       closeMenu();
     };
@@ -31,31 +31,22 @@ export class Charts extends Component {
         <div className="select__title select__title_not-active">
           Select Country
         </div>
-        <ContextMenuItems
-          items={countries}
-          handler={handler}
-        />
+        <ContextMenuItems items={countries} handler={handler} />
       </div>
     );
-  }
+  };
 
   renderContextMenuButton() {
-    const {country, pending} = this.props.charts;
+    const { country, pending } = this.props.charts;
     return (
       <OpenContextMenuButton
         className="select"
         renderContextMenu={this.renderContextMenu}
-        renderContent={toggleContextMenu => {
+        renderContent={(toggleContextMenu) => {
           return (
-            <div
-              className="select__label"
-              onClick={toggleContextMenu}
-            >
+            <div className="select__label" onClick={toggleContextMenu}>
               <span>{country}</span>
-              {pending
-                ? <Loader/>
-                : <ChevronDown className="chevron-up"/>
-              }
+              {pending ? <Loader /> : <ChevronDown className="chevron-up" />}
             </div>
           );
         }}
@@ -64,27 +55,21 @@ export class Charts extends Component {
   }
 
   render() {
-    const {loadMore} = this.props;
-    const {playlistId} = this.props.charts;
-    const {items, loadMorePending, total} = this.props.tracks;
+    const { loadMore } = this.props;
+    const { playlistId } = this.props.charts;
+    const { items, loadMorePending, total } = this.props.tracks;
     const contextMenuButton = this.renderContextMenuButton();
     const loadData = () => loadMore(playlistId, items.length);
     return (
       <section>
-        <BlockHeader
-          title="Charts"
-          button={contextMenuButton}
-        />
+        <BlockHeader title="Charts" button={contextMenuButton} />
         <InfiniteScroll
           total={total}
           dataLength={items.length}
           loadData={loadData}
           pending={loadMorePending}
         >
-          <ChartTracks
-            playlistId={playlistId}
-            tracks={items}
-          />
+          <ChartTracks playlistId={playlistId} tracks={items} />
         </InfiniteScroll>
       </section>
     );

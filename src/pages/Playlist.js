@@ -6,70 +6,70 @@ import PlayButton from "./Tracklist/TracklistPlayButton";
 import MoreButton from "./Tracklist/TracklistMoreButton";
 import Image from "./Tracklist/TracklistImage";
 import Name from "./Tracklist/TracklistName";
-import InfiniteScroll from "components/Common/InfiniteScroll";
-import LikeButton from "components/Common/LikeButton";
-import Tracks from "components/Common/Tracks";
-import Page404 from "pages/Page404";
-import { connectPlaylist } from "containers/Playlist/PlaylistContainer";
-import { USER_ID } from "constants/AppConstants";
-import { ReactComponent as Loader } from "images/loader.svg";
+import InfiniteScroll from "../component/Common/InfiniteScroll";
+import LikeButton from "../component/Common/LikeButton";
+import Tracks from "../component/Common/Tracks";
+import Page404 from "./Page404";
+import { connectPlaylist } from "../containers/Playlist/PlaylistContainer";
+import { USER_ID } from "../constants/AppConstants";
+import { ReactComponent as Loader } from "../images/loader.svg";
 
 class Playlist extends Component {
   componentDidMount() {
-    const {id, loadPlaylist} = this.props;
+    const { id, loadPlaylist } = this.props;
     loadPlaylist(id);
   }
 
   componentDidUpdate(prevProps) {
-    const {id, loadPlaylist} = this.props;
+    const { id, loadPlaylist } = this.props;
     if (id !== prevProps.id) {
       loadPlaylist(id);
     }
   }
 
-  removeTrackFromPlaylist = trackKey => {
-    const {playlist, removeTracksFromPlaylist} = this.props;
+  removeTrackFromPlaylist = (trackKey) => {
+    const { playlist, removeTracksFromPlaylist } = this.props;
     removeTracksFromPlaylist(playlist.id, trackKey, playlist.snapshotId);
-  }
+  };
 
   followPlaylist = () => {
-    const {playlist, id, followPlaylist} = this.props;
+    const { playlist, id, followPlaylist } = this.props;
     followPlaylist(id, playlist);
-  }
+  };
 
   unfollowPlaylist = () => {
-    const {unfollowPlaylist, id} = this.props;
+    const { unfollowPlaylist, id } = this.props;
     unfollowPlaylist(id);
-  }
+  };
 
   removePlaylist = () => {
     this.unfollowPlaylist();
     this.props.history.goBack();
-  }
+  };
 
-  changePlaylistDetails = data => {
-    const {changePlaylistDetails, id} = this.props;
+  changePlaylistDetails = (data) => {
+    const { changePlaylistDetails, id } = this.props;
     changePlaylistDetails(id, data);
-  }
+  };
 
-  uploadCoverImage = file => {
-    const {uploadCoverImage, id} = this.props;
+  uploadCoverImage = (file) => {
+    const { uploadCoverImage, id } = this.props;
     uploadCoverImage(id, file);
-  }
+  };
 
   loadMore = () => {
-    const {playlist, id, loadMoreTracks} = this.props;
+    const { playlist, id, loadMoreTracks } = this.props;
     loadMoreTracks(id, playlist.items.length);
-  }
+  };
 
   checkPlaylistOwner = () => {
     const authorId = this.props.playlist.authors.id;
     const userId = localStorage.getItem(USER_ID);
     return userId === authorId;
-  }
+  };
 
   renderButtons = () => {
-    const {id, playlist} = this.props;
+    const { id, playlist } = this.props;
     const isMyPlaylist = this.checkPlaylistOwner();
     return (
       <div className="tracklist__buttons">
@@ -79,29 +79,28 @@ class Playlist extends Component {
           disabled={!playlist.isAvailableForPreview}
           trackList={playlist.items}
         />
-        {isMyPlaylist
-          ?
+        {isMyPlaylist ? (
           <MoreButton
             collaborative={playlist.collaborative}
             isPublic={playlist.public}
             changePlaylistDetails={this.changePlaylistDetails}
             unfollowPlaylist={this.removePlaylist}
           />
-          :
+        ) : (
           <LikeButton
             isActive={playlist.isSaved}
             unlike={this.unfollowPlaylist}
             like={this.followPlaylist}
           />
-        }
+        )}
       </div>
     );
-  }
+  };
 
   renderInfo = () => {
     const isMyPlaylist = this.checkPlaylistOwner();
-    const {state} = this.props.history.location;
-    const {name, followers, totalTracks} = this.props.playlist;
+    const { state } = this.props.history.location;
+    const { name, followers, totalTracks } = this.props.playlist;
     return (
       <div className="tracklist__info">
         <Name
@@ -111,25 +110,27 @@ class Playlist extends Component {
           focus={Boolean(state && state.newPlaylist)}
         />
         <ul className="tracklist__additional-info">
-          <li><Users/>{followers}</li>
+          <li>
+            <Users />
+            {followers}
+          </li>
           <li className="tracklist__dot">•</li>
           <li>
             {totalTracks === 1
               ? `${totalTracks} track`
-              : `${totalTracks} tracks`
-            }
+              : `${totalTracks} tracks`}
           </li>
         </ul>
         {this.renderButtons()}
       </div>
     );
-  }
+  };
 
   renderTracks = () => {
-    const {id} = this.props;
+    const { id } = this.props;
     const isMyPlaylist = this.checkPlaylistOwner();
-    const {totalTracks, items, loadMorePending} = this.props.playlist;
-    const source = {name: `playlist_${id}`, isMyPlaylist};
+    const { totalTracks, items, loadMorePending } = this.props.playlist;
+    const source = { name: `playlist_${id}`, isMyPlaylist };
     return (
       <div className="tracklist">
         <InfiniteScroll
@@ -137,7 +138,7 @@ class Playlist extends Component {
           dataLength={items.length}
           loadData={this.loadMore}
           pending={loadMorePending}
-          containerSelector='#tracklist-scroll-parent'
+          containerSelector="#tracklist-scroll-parent"
         >
           <Tracks
             trackList={items}
@@ -147,10 +148,10 @@ class Playlist extends Component {
         </InfiniteScroll>
       </div>
     );
-  }
+  };
 
   render() {
-    const {id, image, pending, error} = this.props.playlist;
+    const { id, image, pending, error } = this.props.playlist;
     const isMyPlaylist = this.checkPlaylistOwner();
     if (pending || error) {
       return (

@@ -1,23 +1,22 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
-import BlockHeader from "components/Common/BlockHeader";
-import Artist from "components/Common/Artist";
-import { connectRelatedArtists }
-from "containers/Artist/RelatedArtistsContainer";
-import SkeletonArtists from "components/Skeleton/SkeletonArtists";
-import "styles/Artist.scss";
+import BlockHeader from "../../component/Common/BlockHeader";
+import Artist from "../../component/Common/Artist";
+import { connectRelatedArtists } from "../../containers/Artist/RelatedArtistsContainer";
+import SkeletonArtists from "../../component/Skeleton/SkeletonArtists";
+import "../../style/Artist.scss";
 
 export class RelatedArtists extends Component {
   componentDidMount() {
-    const {artists, loadRelatedArtists} = this.props;
+    const { artists, loadRelatedArtists } = this.props;
     if (!artists.items.length || !artists.artistName) {
       loadRelatedArtists();
     }
   }
 
   render() {
-    const {pending, artistName, items} = this.props.artists;
+    const { pending, artistName, items } = this.props.artists;
     if (pending) {
       return (
         <SkeletonArtists
@@ -34,10 +33,10 @@ export class RelatedArtists extends Component {
       <section>
         <BlockHeader
           title={`More Like ${artistName}`}
-          description='Recommendation'
+          description="Recommendation"
         />
         <div className="artists artists_cols-6">
-          {items.map(item => {
+          {items.map((item) => {
             return (
               <Artist
                 key={item.id}

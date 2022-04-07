@@ -4,8 +4,8 @@ import { MoreVertical, Trash } from "react-feather";
 
 import PublicCheckbox from "./checkboxes/PublicCheckbox";
 import CollaborativeCheckbox from "./checkboxes/CollaborativeCheckbox";
-import ContextMenu from "components/Common/ContextMenu";
-import OpenContextMenuButton from "components/Common/OpenContextMenuButton";
+import ContextMenu from "../../component/Common/ContextMenu";
+import OpenContextMenuButton from "../../component/Common/OpenContextMenuButton";
 
 export default class MoreButton extends Component {
   shouldComponentUpdate(nextProps) {
@@ -15,15 +15,16 @@ export default class MoreButton extends Component {
     );
   }
 
-  renderContextMenuOptions = navigateToPage => {
-    const {isPublic, collaborative, changePlaylistDetails} = this.props;
+  renderContextMenuOptions = (navigateToPage) => {
+    const { isPublic, collaborative, changePlaylistDetails } = this.props;
     return (
       <ul>
         <li
           className="tracklist__more-item tracklist__remove"
           onClick={() => navigateToPage(2)}
         >
-          <Trash /><span>Delete</span>
+          <Trash />
+          <span>Delete</span>
         </li>
         <li className="tracklist__public tracklist__more-item">
           <PublicCheckbox
@@ -41,43 +42,36 @@ export default class MoreButton extends Component {
         </li>
       </ul>
     );
-  }
+  };
 
-  renderConfirm = navigateToPage => {
+  renderConfirm = (navigateToPage) => {
     return (
       <div className="cm-confirm">
-        <h6 className="cm-confirm__title">
-          Confirm to delete
-        </h6>
-        <p className="cm-confirm__description">
-          Do you really want to delete?
-        </p>
+        <h6 className="cm-confirm__title">Confirm to delete</h6>
+        <p className="cm-confirm__description">Do you really want to delete?</p>
         <div
           onClick={() => this.props.unfollowPlaylist()}
           className="cm-confirm__btn cm-confirm__accept-btn btn"
         >
           Yes
         </div>
-        <div
-          onClick={() => navigateToPage(1)}
-          className="cm-confirm__btn btn"
-        >
+        <div onClick={() => navigateToPage(1)} className="cm-confirm__btn btn">
           No
         </div>
       </div>
     );
-  }
+  };
 
-  renderContextMenuButton = toggleContextMenu => {
+  renderContextMenuButton = (toggleContextMenu) => {
     return (
       <div
         onClick={toggleContextMenu}
         className="tracklist__more-btn flex-center"
       >
-        <MoreVertical/>
+        <MoreVertical />
       </div>
     );
-  }
+  };
 
   renderContextMenu = () => {
     const renderContent = (currentPage, navigateToPage) => {
@@ -94,7 +88,7 @@ export default class MoreButton extends Component {
         renderContent={renderContent}
       />
     );
-  }
+  };
 
   render() {
     return (

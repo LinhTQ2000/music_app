@@ -1,15 +1,15 @@
 import { connect } from "react-redux";
-import { loadRelatedArtists } from "actions/ArtistActions";
+import { loadRelatedArtists } from "../../actions/ArtistActions";
 
-const mapStateToProps = store => {
+const mapStateToProps = (store) => {
   return {
     artists: store.relatedArtists,
   };
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    loadRelatedArtists: artistId => {
+    loadRelatedArtists: (artistId) => {
       dispatch(loadRelatedArtists(artistId));
     },
   };

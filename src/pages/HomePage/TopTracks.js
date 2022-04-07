@@ -1,25 +1,25 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
-import BlockHeader from "components/Common/BlockHeader";
-import Tracks from "components/Common/Tracks";
-import { connectTopTracks } from "containers/Tracks/TopTracksContainer";
-import SkeletonTracks from "components/Skeleton/SkeletonTracks";
-import InfiniteScroll from "components/Common/InfiniteScroll";
+import BlockHeader from "../../component/Common/BlockHeader";
+import Tracks from "../../component/Common/Tracks";
+import { connectTopTracks } from "../../containers/Tracks/TopTracksContainer";
+import SkeletonTracks from "../../component/Skeleton/SkeletonTracks";
+import InfiniteScroll from "../../component/Common/InfiniteScroll";
 
 export class TopTracks extends Component {
   componentWillMount() {
     const tracks = this.props.tracks.items;
-    const {chartsCountry, loadTopTracks} = this.props;
+    const { chartsCountry, loadTopTracks } = this.props;
     if (!tracks.length || (tracks.length && chartsCountry !== "global")) {
       loadTopTracks();
     }
   }
 
   render() {
-    const {pending, items, total, loadMorePending} = this.props.tracks;
+    const { pending, items, total, loadMorePending } = this.props.tracks;
     const loadMore = () => this.props.loadMore(items.length);
-    const source = {name: "TopTracks"};
+    const source = { name: "TopTracks" };
     if (pending) {
       return (
         <SkeletonTracks
@@ -32,10 +32,7 @@ export class TopTracks extends Component {
     }
     return (
       <section className="top-songs">
-        <BlockHeader
-          title="Global Top 50"
-          description="Hot Track"
-        />
+        <BlockHeader title="Global Top 50" description="Hot Track" />
         <div
           className="top-songs__container custom-scrollbar"
           id="top-tracks-scrollParent"
@@ -48,10 +45,7 @@ export class TopTracks extends Component {
               pending={loadMorePending}
               containerSelector="#top-tracks-scrollParent"
             >
-              <Tracks
-                trackList={items}
-                source={source}
-              />
+              <Tracks trackList={items} source={source} />
             </InfiniteScroll>
           </div>
         </div>
