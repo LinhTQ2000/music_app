@@ -19,10 +19,11 @@ export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
-    checkWindowWidth();
     if (window.innerWidth <= 1024) {
+      checkWindowWidth();
       window.addEventListener("resize", checkWindowWidth);
     } else {
+      checkWindowWidth();
       window.removeEventListener("resize", checkWindowWidth);
     }
   });
