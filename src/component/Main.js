@@ -42,7 +42,8 @@ function Main() {
   return (
     <>
       <Routes location={location}>
-        <Route exact path={RouteConstant.HOME} element={Home} />
+        <Route path={RouteConstant.NEW} element={<NewReleases />} />
+        {/* <Route exact path={RouteConstant.HOME} element={<Home />} /> */}
         {/* <Route path={RouteConstant.PLAYLISTS} element={UserPlaylists} />
         <Route path={RouteConstant.ARTISTS} element={FollowedArtists} />
         <Route path={RouteConstant.LIKED} element={SavedTracks} />
