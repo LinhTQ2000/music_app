@@ -1,7 +1,7 @@
 import Spotify from "spotify-web-api-js";
 
-export const CLIENT_ID = "<CLIENT_ID>";
-export const REDIRECT_URL = "<REDIRECT_URL>";
+export const CLIENT_ID = "4392cbb11b8a46d1afa92ba9e5646d09";
+export const REDIRECT_URL = "http://localhost:3000/";
 export const SCOPE = [
   "playlist-read-private",
   "playlist-read-collaborative",
@@ -14,13 +14,13 @@ export const SCOPE = [
   "user-library-read",
   "user-library-modify",
   "user-read-private",
-  "user-read-birthdate",
-  "user-read-email",
-  "user-top-read",
-  "user-read-playback-state",
-  "user-modify-playback-state",
-  "user-read-currently-playing",
-  "user-read-recently-played",
+  // "user-read-birthdate",
+  // "user-read-email",
+  // "user-top-read",
+  // "user-read-playback-state",
+  // "user-modify-playback-state",
+  // "user-read-currently-playing",
+  // "user-read-recently-played",
 ].join(" ");
 export const TOKEN_NAME = "spotify_access_token";
 export const EXPIRATION_TIME = "spotify_expires_in";

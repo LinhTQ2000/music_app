@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Navigate } from "react-router-dom";
 import { ReactComponent as AddPlaylistIcon } from "../../images/addPlaylist.svg";
+import { Redirect } from "react-router-dom";
 
 export default class NewPlaylistBlock extends Component {
   state = {
@@ -34,7 +35,7 @@ export default class NewPlaylistBlock extends Component {
     const { isNewPlaylistOpen, renderContent } = this.props;
     if (this.state.newPlaylistPath && !isNewPlaylistOpen) {
       return (
-        <Navigate
+        <Redirect
           push
           to={{
             pathname: this.state.newPlaylistPath,

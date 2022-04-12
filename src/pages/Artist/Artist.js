@@ -10,6 +10,7 @@ import RelatedArtists from "./RelatedArtists";
 import Albums from "../ArtistAlbums";
 import Singles from "../ArtistSingles";
 import "../../style/Artist.scss";
+import { Switch } from "react-router-dom";
 
 export default class Artist extends Component {
   componentDidUpdate(prevProps) {
@@ -25,7 +26,7 @@ export default class Artist extends Component {
   render() {
     const { id } = this.props.match.params;
     return (
-      <Routes location={this.props.location}>
+      <Switch location={this.props.location}>
         <Route exact path={`${ARTIST}/${id}`}>
           <section className="section-separators">
             <ArtistHeader id={id} />
@@ -47,7 +48,7 @@ export default class Artist extends Component {
             return <Singles id={id} />;
           }}
         />
-      </Routes>
+      </Switch>
     );
   }
 }

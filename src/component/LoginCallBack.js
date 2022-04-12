@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Redirect } from "react-router-dom";
 import { Navigate } from "react-router-dom";
 import Auth from "../utils/auth";
 
@@ -31,6 +32,6 @@ export default class LoginCallback extends Component {
       Auth.setTokenToSpotify();
       Auth.setUserId();
     }
-    return <Navigate to="/" />;
+    return <Redirect to="/" />;
   }
 }

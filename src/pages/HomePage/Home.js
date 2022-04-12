@@ -16,7 +16,7 @@ export default class Home extends Component {
   render() {
     return (
       <section className="section-separators">
-        <NewReleases/>
+        <NewReleases />
         <section className="row">
           <TopTracks />
           <Categories />

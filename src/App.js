@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component, useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 
 import LoginCallback from "./component/LoginCallBack";
@@ -9,26 +9,28 @@ import Main from "./component/Main";
 import * as RouteConstant from "./constants/RouteConstant";
 import "./App.scss";
 import Auth from "./utils/auth";
-function App() {
-  Auth.setTokenToSpotify();
-  return (
-    <div className="app">
-      <div className="app__container">
-        <Navbar />
-        <div className="app__content">
-          <Search />
-          <Main />
-          <Routes>
+export default class App extends Component {
+  constructor() {
+    super();
+    Auth.setTokenToSpotify();
+  }
+
+  render() {
+    return (
+      <div className="app">
+        <div className="app__container">
+          <Navbar />
+          <div className="app__content">
+            <Search />
+            <Main />
             <Route
               path={RouteConstant.LOGIN_CALLBACK}
               component={LoginCallback}
             />
-          </Routes>
+          </div>
+          <Player />
         </div>
-        <Player />
       </div>
-    </div>
-  );
+    );
+  }
 }
-
-export default App;
