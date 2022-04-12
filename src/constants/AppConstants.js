@@ -14,13 +14,13 @@ export const SCOPE = [
   "user-library-read",
   "user-library-modify",
   "user-read-private",
-  // "user-read-birthdate",
-  // "user-read-email",
-  // "user-top-read",
-  // "user-read-playback-state",
-  // "user-modify-playback-state",
-  // "user-read-currently-playing",
-  // "user-read-recently-played",
+  "user-read-birthdate",
+  "user-read-email",
+  "user-top-read",
+  "user-read-playback-state",
+  "user-modify-playback-state",
+  "user-read-currently-playing",
+  "user-read-recently-played",
 ].join(" ");
 export const TOKEN_NAME = "spotify_access_token";
 export const EXPIRATION_TIME = "spotify_expires_in";

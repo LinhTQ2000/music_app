@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
-import { Navigate } from "react-router-dom";
 import Auth from "../utils/auth";
 
 export default class LoginCallback extends Component {
@@ -21,6 +20,7 @@ export default class LoginCallback extends Component {
       access_token = params.access_token,
       state = params.state,
       storedState = localStorage.getItem("spotify_auth_state");
+    console.log("params", params);
 
     if (access_token && (state == null || state !== storedState)) {
       console.error("There was an error during the authentication");
