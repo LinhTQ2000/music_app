@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Search as Icon } from "react-feather";
-// import { connectSearchResults } from "containers/SearchResultsContainer";
+import { connectSearchResults } from "../../containers/SearchResultsContainer";
 
 export class SearchBtn extends Component {
   render() {
@@ -23,5 +23,4 @@ SearchBtn.propTypes = {
   className: PropTypes.string,
 };
 
-// export default connectSearchResults(SearchBtn);
-export default SearchBtn;
+export default connectSearchResults(SearchBtn);
