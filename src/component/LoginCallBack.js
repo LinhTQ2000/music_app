@@ -4,7 +4,7 @@ import Auth from "../utils/auth";
 
 export default class LoginCallback extends Component {
   getHashParams = () => {
-    const { location } = this.props,
+    const { location } = window,
       hashParams = {};
     let e,
       r = /([^&;=]+)=?([^&;]*)/g,
@@ -20,7 +20,7 @@ export default class LoginCallback extends Component {
       access_token = params.access_token,
       state = params.state,
       storedState = localStorage.getItem("spotify_auth_state");
-    console.log("params", params);
+    console.log("access_token", access_token);
 
     if (access_token && (state == null || state !== storedState)) {
       console.error("There was an error during the authentication");

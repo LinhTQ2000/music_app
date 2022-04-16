@@ -1,31 +1,32 @@
-import Spotify from "spotify-web-api-js";
+import SpotifyWebApi from "spotify-web-api-js";
 
 export const CLIENT_ID = "4392cbb11b8a46d1afa92ba9e5646d09";
-export const REDIRECT_URL = "http://localhost:3000/";
+export const REDIRECT_URL = "http://localhost:3000/callback";
 export const SCOPE = [
-  "playlist-read-private",
-  "playlist-read-collaborative",
-  "playlist-modify-public",
-  "playlist-modify-private",
-  "streaming",
   "ugc-image-upload",
+  "user-modify-playback-state",
+  "user-read-playback-state",
+  "user-read-currently-playing",
   "user-follow-modify",
   "user-follow-read",
-  "user-library-read",
-  "user-library-modify",
-  "user-read-private",
-  "user-read-birthdate",
-  "user-read-email",
-  "user-top-read",
-  "user-read-playback-state",
-  "user-modify-playback-state",
-  "user-read-currently-playing",
   "user-read-recently-played",
+  "user-read-playback-position",
+  "user-top-read",
+  "playlist-read-collaborative",
+  "playlist-modify-public",
+  "playlist-read-private",
+  "playlist-modify-private",
+  "app-remote-control",
+  "streaming",
+  "user-read-email",
+  "user-read-private",
+  "user-library-modify",
+  "user-library-read",
 ].join(" ");
 export const TOKEN_NAME = "spotify_access_token";
 export const EXPIRATION_TIME = "spotify_expires_in";
 export const USER_ID = "spotify_user_id";
-export const SPOTIFY_API = new Spotify();
+export const SPOTIFY_API = new SpotifyWebApi();
 
 export const NEW_RELEASES_LIMIT = 20;
 export const USER_PLAYLISTS_LIMIT = 19;
