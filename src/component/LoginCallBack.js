@@ -20,7 +20,6 @@ export default class LoginCallback extends Component {
       access_token = params.access_token,
       state = params.state,
       storedState = localStorage.getItem("spotify_auth_state");
-    console.log("access_token", access_token);
 
     if (access_token && (state == null || state !== storedState)) {
       console.error("There was an error during the authentication");
