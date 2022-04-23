@@ -275,8 +275,19 @@ input {
   }
   .slick-dots {
     position: relative;
+    display: flex !important;
+    justify-content: center;
     bottom: 0;
     margin-top: 20px;
+    button {
+      margin: 5px;
+      display: block;
+      width: 30px;
+      height: 30px;
+    }
+    .slick-active {
+      background-color: $text-secondary;
+    }
   }
   .slick-list {
     margin-left: -10px;
@@ -285,6 +296,9 @@ input {
     @media (max-width: 450px) {
       min-height: 0;
     }
+  }
+  .slick-track {
+    display: flex;
   }
 }
 
