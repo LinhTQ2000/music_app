@@ -69,7 +69,6 @@ export function player(state = initialPlayerState, action) {
           },
         };
       }
-      break;
     default:
       return state;
   }
