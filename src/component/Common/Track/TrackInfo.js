@@ -5,7 +5,7 @@ import AuthorList from "../AuthorList";
 export default function TrackInfo(props) {
   const { charts, track, children } = props;
   return (
-    <React.Fragment>
+    <>
       {charts && (
         <span className="track__chart-number">
           {`${track.key < 10 ? "0" + track.key : track.key}`}
@@ -21,7 +21,7 @@ export default function TrackInfo(props) {
         <p className="track__duration">{track.duration}</p>
         {children}
       </div>
-    </React.Fragment>
+    </>
   );
 }
 

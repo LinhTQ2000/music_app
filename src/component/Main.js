@@ -39,7 +39,7 @@ class Main extends Component {
       location.state.modal &&
       this.previousLocation !== location;
     return (
-      <React.Fragment>
+      <>
         <Switch location={isModal ? this.previousLocation : location}>
           <Route exact path={RouteConstant.HOME} component={Home} />
           <Route path={RouteConstant.PLAYLISTS} component={UserPlaylists} />
@@ -109,7 +109,7 @@ class Main extends Component {
             }}
           />
         ) : null}
-      </React.Fragment>
+      </>
     );
   }
 }

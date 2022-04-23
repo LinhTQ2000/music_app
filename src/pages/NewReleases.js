@@ -1,4 +1,4 @@
-import React, { Component, useEffect } from "react";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
 
 import Block from "../component/Common/Block";
@@ -6,8 +6,6 @@ import BlockHeader from "../component/Common/BlockHeader";
 import InfiniteScroll from "../component/Common/InfiniteScroll";
 import SkeletonBlocks from "../component/Skeleton/SkeletonBlocks";
 import { connectNewReleases } from "../containers/Album/NewReleasesContainer";
-import useNewReleases from "../hook/useNewReleases";
-import { isEmpty } from "lodash";
 
 export class NewReleases extends Component {
   componentDidMount() {

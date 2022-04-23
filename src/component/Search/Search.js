@@ -42,7 +42,7 @@ export class Search extends Component {
     const { toggleSearch } = this.props;
     const { isOpen, pending, type, items } = this.props.searchResults;
     return (
-      <React.Fragment>
+      <>
         <TransitionGroup>
           {isOpen && (
             <CSSTransition timeout={800} classNames="search__input-container">
@@ -67,7 +67,7 @@ export class Search extends Component {
             </CSSTransition>
           )}
         </TransitionGroup>
-      </React.Fragment>
+      </>
     );
   }
 }

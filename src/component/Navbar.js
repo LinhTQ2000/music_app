@@ -46,7 +46,7 @@ export default function Navbar() {
     { path: RouteConstant.ARTISTS, icon: <User />, name: "Artists" },
   ];
   return (
-    <React.Fragment>
+    <>
       {isHidden && (
         <div
           className="navbar__open-btn flex-center fixed-btn"
@@ -112,7 +112,7 @@ export default function Navbar() {
           </ul>
         </div>
       </nav>
-    </React.Fragment>
+    </>
   );
   // }
 }

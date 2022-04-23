@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Route, Routes } from "react-router-dom";
+import { Route } from "react-router-dom";
 
 import { ALBUMS, SINGLES, ARTIST } from "../../constants/RouteConstant";
 import ArtistHeader from "./ArtistHeader";
