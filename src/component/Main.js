@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { Route } from "react-router-dom";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
+import IconButton from "@mui/material/IconButton";
+import Tooltip from "@mui/material/Tooltip";
 
 import * as RouteConstant from "../constants/RouteConstant";
 import Album from "../pages/Album";
@@ -18,11 +20,45 @@ import Home from "../pages/HomePage/Home";
 import Page404 from "../pages/Page404";
 import { Switch } from "react-router-dom";
 import { withRouter } from "react-router-dom";
+import Auth from "../utils/auth";
+import { Switch as SwichMode, Typography } from "@mui/material";
+import {
+  Avatar,
+  Chip,
+  FormControlLabel,
+  FormGroup,
+  ListItemIcon,
+  Menu,
+  MenuItem,
+} from "@mui/material";
+import { USER_AVATAR, USER_NAME } from "../constants/AppConstants";
+import { Logout } from "@mui/icons-material";
 
 class Main extends Component {
   constructor(props) {
     super(props);
     this.previousLocation = this.props.location;
+    if (JSON.parse(localStorage.getItem("DARK_MODE")) === true) {
+      document.body.classList.add("dark-mode");
+    }
+    this.state = {
+      anchorEl: null,
+      darkMode: JSON.parse(localStorage.getItem("DARK_MODE")),
+    };
+    this.handleModeChange = this.handleModeChange.bind(this);
+  }
+
+  handleModeChange() {
+    if (!this.state.darkMode) {
+      document.body.classList.add("dark-mode");
+    } else {
+      document.body.classList.remove("dark-mode");
+    }
+
+    this.setState({
+      darkMode: !this.state.darkMode,
+    });
+    localStorage.setItem("DARK_MODE", !this.state.darkMode);
   }
 
   componentWillUpdate() {
@@ -32,14 +68,104 @@ class Main extends Component {
     }
   }
 
+  handleLogout = () => {
+    Auth.removeToken();
+  };
+
+  handleClick = (event) => {
+    this.setState({
+      anchorEl: event.currentTarget,
+    });
+  };
+
+  handleClose = () => {
+    this.setState({
+      anchorEl: null,
+    });
+  };
+
   render() {
     const { location } = this.props;
     const isModal =
       location.state &&
       location.state.modal &&
       this.previousLocation !== location;
+    const userName = localStorage.getItem(USER_NAME);
+    const avatarUrl = localStorage.getItem(USER_AVATAR);
+    const open = Boolean(this.state.anchorEl);
+    const anchorEl = this.state.anchorEl;
     return (
       <>
+        <div className="user-logout">
+          <Tooltip title="user">
+            <IconButton
+              onClick={this.handleClick}
+              aria-controls={open ? "account-menu" : undefined}
+              aria-haspopup="true"
+              aria-expanded={open ? "true" : undefined}
+            >
+              <Chip
+                avatar={<Avatar alt={userName} src={avatarUrl} />}
+                label={userName}
+                variant="outlined"
+              />
+            </IconButton>
+          </Tooltip>
+          <Menu
+            anchorEl={anchorEl}
+            id="account-menu"
+            open={open}
+            onClose={this.handleClose}
+            // onClick={this.handleModeChange}
+            PaperProps={{
+              elevation: 0,
+              sx: {
+                overflow: "visible",
+                filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
+                mt: 1.5,
+                "& .MuiAvatar-root": {
+                  width: 32,
+                  height: 32,
+                  ml: -0.5,
+                  mr: 1,
+                },
+                "&:before": {
+                  content: '""',
+                  display: "block",
+                  position: "absolute",
+                  top: 0,
+                  right: 14,
+                  width: 5,
+                  height: 5,
+                  bgcolor: "background.paper",
+                  transform: "translateY(-50%) rotate(45deg)",
+                  zIndex: 0,
+                },
+              },
+            }}
+            transformOrigin={{ horizontal: "right", vertical: "top" }}
+            anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
+          >
+            <MenuItem onClick={this.handleModeChange}>
+              <FormGroup>
+                <FormControlLabel
+                  control={
+                    <SwichMode size="small" checked={this.state.darkMode} />
+                  }
+                  label={
+                    <Typography sx={{ fontSize: "14px" }}>Dark Mode</Typography>
+                  }
+                />
+              </FormGroup>
+            </MenuItem>
+            <MenuItem sx={{ fontSize: "14px" }}>
+              <ListItemIcon>
+                <Logout fontSize="small" />
+              </ListItemIcon>
+              Logout
+            </MenuItem>
+          </Menu>
+        </div>
         <Switch location={isModal ? this.previousLocation : location}>
           <Route exact path={RouteConstant.HOME} component={Home} />
           <Route path={RouteConstant.PLAYLISTS} component={UserPlaylists} />

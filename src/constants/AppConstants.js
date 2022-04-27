@@ -26,6 +26,8 @@ export const SCOPE = [
 export const TOKEN_NAME = "spotify_access_token";
 export const EXPIRATION_TIME = "spotify_expires_in";
 export const USER_ID = "spotify_user_id";
+export const USER_NAME = "user_name";
+export const USER_AVATAR = "user_avatar";
 export const SPOTIFY_API = new SpotifyWebApi();
 
 export const NEW_RELEASES_LIMIT = 20;

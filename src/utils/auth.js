@@ -5,7 +5,9 @@ import {
   SCOPE,
   SPOTIFY_API,
   TOKEN_NAME,
+  USER_AVATAR,
   USER_ID,
+  USER_NAME,
 } from "../constants/AppConstants";
 import hasTokenExpired from "./hasTokenExpired";
 
@@ -41,6 +43,10 @@ export default class Auth {
     localStorage.setItem(EXPIRATION_TIME, expiration_time);
   }
 
+  static removeToken() {
+    localStorage.setItem(TOKEN_NAME, "");
+  }
+
   static setTokenToSpotify() {
     if (!hasTokenExpired()) {
       SPOTIFY_API.setAccessToken(this._getToken());
@@ -49,7 +55,11 @@ export default class Auth {
 
   static setUserId() {
     SPOTIFY_API.getMe().then(
-      (response) => localStorage.setItem(USER_ID, response.id),
+      (response) => {
+        localStorage.setItem(USER_ID, response.id);
+        localStorage.setItem(USER_NAME, response.display_name);
+        localStorage.setItem(USER_AVATAR, response.images[0].url);
+      },
       (error) => console.error(error)
     );
   }

@@ -10,6 +10,16 @@ body {
   }
 }
 
+body.dark-mode {
+  background: $bg-primary-dark;
+  font-size: ms(0);
+  line-height: 1.6;
+  font-family: $font-family-base;
+  &.disable-scroll {
+    overflow-y: hidden;
+  }
+}
+
 * {
   box-sizing: border-box;
 }
@@ -284,9 +294,11 @@ input {
       display: block;
       width: 30px;
       height: 30px;
+      border-radius: 50%;
     }
-    .slick-active {
+    .slick-active button {
       background-color: $text-secondary;
+      color: $bg-primary;
     }
   }
   .slick-list {
@@ -424,4 +436,9 @@ input {
   padding-bottom: 50px;
   margin-bottom: 50px;
   border-bottom: 1px solid $border-color;
+}
+
+.user-logout {
+  position: relative;
+  text-align: right;
 }
