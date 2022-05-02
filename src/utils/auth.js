@@ -33,6 +33,7 @@ export default class Auth {
     AUTH_URL += "&redirect_uri=" + encodeURIComponent(REDIRECT_URL);
     AUTH_URL += "&scope=" + encodeURIComponent(SCOPE);
     AUTH_URL += "&response_type=" + encodeURIComponent("token");
+    AUTH_URL += "&show_dialog=true";
     AUTH_URL += "&state=" + encodeURIComponent(state);
     localStorage.setItem("spotify_auth_state", state);
     return AUTH_URL;
@@ -43,8 +44,8 @@ export default class Auth {
     localStorage.setItem(EXPIRATION_TIME, expiration_time);
   }
 
-  static removeToken() {
-    localStorage.setItem(TOKEN_NAME, "");
+  static logout() {
+    localStorage.clear();
   }
 
   static setTokenToSpotify() {

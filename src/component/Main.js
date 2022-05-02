@@ -43,7 +43,7 @@ class Main extends Component {
     }
     this.state = {
       anchorEl: null,
-      darkMode: JSON.parse(localStorage.getItem("DARK_MODE")),
+      darkMode: JSON.parse(localStorage.getItem("DARK_MODE")) || false,
     };
     this.handleModeChange = this.handleModeChange.bind(this);
   }
@@ -69,7 +69,8 @@ class Main extends Component {
   }
 
   handleLogout = () => {
-    Auth.removeToken();
+    Auth.logout();
+    Auth.redirectToLoginPage();
   };
 
   handleClick = (event) => {
@@ -116,7 +117,6 @@ class Main extends Component {
             id="account-menu"
             open={open}
             onClose={this.handleClose}
-            // onClick={this.handleModeChange}
             PaperProps={{
               elevation: 0,
               sx: {
@@ -158,7 +158,7 @@ class Main extends Component {
                 />
               </FormGroup>
             </MenuItem>
-            <MenuItem sx={{ fontSize: "14px" }}>
+            <MenuItem sx={{ fontSize: "14px" }} onClick={this.handleLogout}>
               <ListItemIcon>
                 <Logout fontSize="small" />
               </ListItemIcon>
