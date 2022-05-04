@@ -1,6 +1,4 @@
-@import
-"variables",
-"modularscale";
+@import "variables", "modularscale";
 
 .block {
   padding: 0 10px;
@@ -16,6 +14,13 @@
     font-size: ms(-2);
     font-weight: 500;
     color: $text-dark;
+    margin-bottom: 2px;
+    word-break: break-word;
+  }
+  &__title.dark-mode {
+    font-size: ms(-2);
+    font-weight: 500;
+    color: $text-while;
     margin-bottom: 2px;
     word-break: break-word;
   }

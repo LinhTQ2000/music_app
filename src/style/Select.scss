@@ -1,6 +1,4 @@
-@import 
-"variables",
-"modularscale";
+@import "variables", "modularscale";
 
 .select {
   width: 250px;
@@ -18,11 +16,12 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    color: $text-primary;
     border-radius: 10px;
     svg {
-       transition: all .3s;
-       width: 24px;
-       height: 24px;
+      transition: all 0.3s;
+      width: 24px;
+      height: 24px;
     }
   }
   &__title {
@@ -42,14 +41,14 @@
     }
   }
   &.more-btn_active .chevron-up {
-     transform: rotate(-180deg);
+    transform: rotate(-180deg);
   }
   &__dropdown {
     width: 100%;
     overflow: hidden;
     position: absolute;
     font-size: ms(-1);
-    background-color: $bg-primary; 
+    background-color: $bg-primary;
     border-radius: 0 0 10px 10px;
     z-index: 2;
   }

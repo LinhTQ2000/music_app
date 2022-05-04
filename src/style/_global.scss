@@ -34,6 +34,16 @@ h6 {
   color: $text-dark;
 }
 
+h1.dark-mode,
+h2.dark-mode,
+h3.dark-mode,
+h4.dark-mode,
+h5.dark-mode,
+h6.dark-mode {
+  font-weight: 600;
+  color: $text-while;
+}
+
 h1 {
   font-size: ms(11);
 }
@@ -127,8 +137,8 @@ input {
 
 .like-btn {
   &_active {
-    stroke: $text-dark;
-    fill: $text-dark;
+    stroke: red;
+    fill: red;
   }
 }
 
@@ -255,6 +265,9 @@ input {
     margin: 0 auto;
     cursor: pointer;
   }
+  &__title {
+    color: $text-primary;
+  }
   &__icon svg {
     width: 40px;
     height: 40px;
@@ -295,6 +308,7 @@ input {
       width: 30px;
       height: 30px;
       border-radius: 50%;
+      color: $text-secondary;
     }
     .slick-active button {
       background-color: $text-secondary;

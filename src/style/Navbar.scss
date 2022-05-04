@@ -1,6 +1,4 @@
-@import
-"variables",
-"modularscale";
+@import "variables", "modularscale";
 
 .navbar {
   position: fixed;
@@ -31,14 +29,14 @@
     &-header {
       margin-bottom: 30px;
       font-size: ms(-3);
-      letter-spacing: .9px;
+      letter-spacing: 0.9px;
       font-weight: 600;
       color: $text-secondary;
     }
   }
   &__item {
     display: inline-block;
-    letter-spacing: .6px;
+    letter-spacing: 0.6px;
     font-size: ms(-1);
     color: $text-secondary;
     font-weight: 500;
@@ -49,6 +47,13 @@
         fill: $text-dark;
       }
     }
+    &.active.dark-mode {
+      font-weight: 500;
+      color: $text-while;
+      svg path {
+        fill: $text-while;
+      }
+    }
   }
   &__icon {
     margin-right: 15px;
@@ -57,7 +62,7 @@
       height: 20px;
       vertical-align: middle;
       path {
-        fill: #B7B7B7;
+        fill: #b7b7b7;
       }
     }
   }

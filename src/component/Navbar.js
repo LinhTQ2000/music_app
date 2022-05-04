@@ -8,7 +8,7 @@ import { ReactComponent as Heart } from "../images/Navbar/Heart.svg";
 import { ReactComponent as Label } from "../images/Navbar/Label.svg";
 import { ReactComponent as LightBulb } from "../images/Navbar/LightBulb.svg";
 import { ReactComponent as Lightning } from "../images/Navbar/Lightning.svg";
-import logo from "../images/spotify-logo.png";
+import logo from "../images/Spotify_Logo_RGB_Green.png";
 import { Menu, X } from "react-feather";
 import { NavLink } from "react-router-dom";
 import "../style/Navbar.scss";
@@ -20,6 +20,7 @@ export default function Navbar() {
 
   useEffect(() => {
     window.addEventListener("resize", checkWindowWidth);
+    return () => window.removeEventListener("resize", checkWindowWidth);
   });
 
   const checkWindowWidth = () => {

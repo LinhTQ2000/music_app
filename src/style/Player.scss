@@ -1,6 +1,4 @@
-@import
-"variables",
-"modularscale";
+@import "variables", "modularscale";
 
 @mixin flex-center($align-items: center, $justify-content: center) {
   display: flex;
@@ -185,7 +183,7 @@
       display: block;
     }
     &:after {
-      content: '';
+      content: "";
       position: absolute;
       border-left: 8px solid transparent;
       border-right: 8px solid transparent;
@@ -201,8 +199,8 @@
       fill: $bg-primary;
       stroke: $text-primary;
       &.like-btn_active {
-        stroke: $text-primary;
-        fill: $text-primary;
+        stroke: red;
+        fill: red;
       }
     }
   }

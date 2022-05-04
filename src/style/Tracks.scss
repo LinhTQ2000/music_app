@@ -1,6 +1,4 @@
-@import
-"variables.scss",
-"modularscale.scss";
+@import "variables.scss", "modularscale.scss";
 
 .track {
   display: flex;
@@ -40,25 +38,25 @@
     }
     &_has-image {
       &:before {
-        content: '';
+        content: "";
         position: absolute;
         left: 0;
         right: 0;
         width: 100%;
-        background: rgba(0, 0, 0, .5);
+        background: rgba(0, 0, 0, 0.5);
         height: 100%;
         border-radius: $border-radius;
-        transition: all .3s;
+        transition: all 0.3s;
         opacity: 0;
       }
       .track__icon {
         position: absolute;
         opacity: 0;
         border: 0;
-        transition: all .3s;
+        transition: all 0.3s;
         svg {
-          fill: #FFFFFF;
-          stroke: #FFFFFF;
+          fill: #ffffff;
+          stroke: #ffffff;
           width: 25px;
           height: 25px;
           margin: 0;
@@ -75,6 +73,7 @@
     width: 22px;
     font-weight: 500;
     font-size: ms(-2);
+    color: $text-primary;
   }
   &__info {
     position: relative;
@@ -89,6 +88,7 @@
     font-weight: 500;
     font-size: ms(-2);
     margin-bottom: 2px;
+    color: $text-primary;
   }
   &__authors {
     font-size: ms(-3);
@@ -162,7 +162,7 @@
 
 .tracks {
   display: flex;
-  flex-wrap: wrap; 
+  flex-wrap: wrap;
   &_col-2 {
     margin-right: -30px;
     .column {

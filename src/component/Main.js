@@ -31,34 +31,68 @@ import {
   Menu,
   MenuItem,
 } from "@mui/material";
-import { USER_AVATAR, USER_NAME } from "../constants/AppConstants";
+import { DARK_MODE, USER_AVATAR, USER_NAME } from "../constants/AppConstants";
 import { Logout } from "@mui/icons-material";
 
 class Main extends Component {
   constructor(props) {
     super(props);
     this.previousLocation = this.props.location;
-    if (JSON.parse(localStorage.getItem("DARK_MODE")) === true) {
+    if (JSON.parse(localStorage.getItem(DARK_MODE)) === true) {
       document.body.classList.add("dark-mode");
     }
     this.state = {
       anchorEl: null,
-      darkMode: JSON.parse(localStorage.getItem("DARK_MODE")) || false,
+      darkMode: JSON.parse(localStorage.getItem(DARK_MODE)) || false,
     };
     this.handleModeChange = this.handleModeChange.bind(this);
   }
 
-  handleModeChange() {
-    if (!this.state.darkMode) {
+  componentDidUpdate() {
+    if (this.state.darkMode) {
       document.body.classList.add("dark-mode");
-    } else {
-      document.body.classList.remove("dark-mode");
-    }
 
+      const arrH3 = document.getElementsByTagName("h3");
+      for (const h3 of arrH3) {
+        h3?.classList.add("dark-mode");
+      }
+
+      const arrBlock = document.getElementsByClassName("block__title");
+      for (const title of arrBlock) {
+        title?.classList.add("dark-mode");
+      }
+
+      const arrArtist = document.querySelectorAll(".artist__name");
+      for (const artist of arrArtist) {
+        artist?.classList.add("dark-mode");
+      }
+      document.querySelector(".active")?.classList.add("dark-mode");
+    } else {
+      document.body?.classList.remove("dark-mode");
+
+      const arrH3 = document.getElementsByTagName("h3");
+      for (const h3 of arrH3) {
+        h3?.classList.remove("dark-mode");
+      }
+
+      const arrBlock = document.getElementsByClassName("block__title");
+      for (const title of arrBlock) {
+        title?.classList.remove("dark-mode");
+      }
+
+      const arrArtist = document.querySelectorAll(".artist__name");
+      for (const artist of arrArtist) {
+        artist?.classList.remove("dark-mode");
+      }
+      document.querySelector(".active")?.classList.remove("dark-mode");
+    }
+  }
+
+  handleModeChange() {
     this.setState({
       darkMode: !this.state.darkMode,
     });
-    localStorage.setItem("DARK_MODE", !this.state.darkMode);
+    localStorage.setItem(DARK_MODE, !this.state.darkMode);
   }
 
   componentWillUpdate() {
@@ -108,6 +142,7 @@ class Main extends Component {
               <Chip
                 avatar={<Avatar alt={userName} src={avatarUrl} />}
                 label={userName}
+                sx={this.state.darkMode ? { color: "#fff" } : { color: "#000" }}
                 variant="outlined"
               />
             </IconButton>
