@@ -1,7 +1,7 @@
 import SpotifyWebApi from "spotify-web-api-js";
 
 export const CLIENT_ID = "4392cbb11b8a46d1afa92ba9e5646d09";
-export const REDIRECT_URL = "http://localhost:3000/callback";
+export const REDIRECT_URL = "http://musicapp-e7537.web.app/callback";
 export const SCOPE = [
   "ugc-image-upload",
   "user-modify-playback-state",
